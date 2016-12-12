@@ -15,8 +15,10 @@
 
 	<name>formation-app-web (Web Module)</name>
 	<url>http://maven.apache.org</url>
+	
 
 	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
 	    
 	    <plugins>
 	      <plugin>
