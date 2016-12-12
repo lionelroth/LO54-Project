@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Client List</title>
+	</h:head>
+	<h:body>
+	
+		<p:panel header="Filter" id="filterPanel">
+			<h:form id="filtersForm">
+			
+				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+					<p:selectBooleanCheckbox value="#{sessionListWiew.courseCodeFilterSelected}"/>
+					<h:outputText value="Filtre code : "/>
+					<p:inputText value="#{sessionListWiew.courseCodeFilter}"/>
+					
+					<p:selectBooleanCheckbox value="#{sessionListWiew.courseTitleFilterSelected}" />
+					<h:outputText value="Filtre titre : "/>
+					<p:inputText value="#{sessionListWiew.courseTiteleFilter}"/>
+					
+					<p:selectBooleanCheckbox value="#{sessionListWiew.dateMiniSeleted}" />
+					<h:outputText value="Date Debut minimum : "/>
+					<p:calendar value="#{sessionListWiew.dateMini}" />
+					
+					<p:selectBooleanCheckbox value="#{sessionListWiew.dateMaxiSeleted}" />
+					<h:outputText value="Date Fin maximum : "/>
+					<p:calendar value="#{sessionListWiew.dateMaxi}" />
+					
+					<p:selectBooleanCheckbox value="#{sessionListWiew.locationFilterSelected}" immediate="true"/>
+					<h:outputText value="Location : "/>
+					<p:selectCheckboxMenu id="locationSelectCheckboxMenuId"
+					value="#{sessionListWiew.selectedLocations}"
+					converter="locationConverter"
+					filter="true" filterMatchMode="startsWith"
+					label="Cities" updateLabel="true" >
+						<f:selectItems value="#{sessionListWiew.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/>
+					</p:selectCheckboxMenu>
+					
+				</h:panelGrid>
+				<p:commandButton type="submit" id="button3" value="search" update="dataListForm"/>
+			</h:form>
+		</p:panel>
+		
+		
+		
+		<p:panel header="List">	
+			<h:form id="dataListForm">
+			    <p:dataList id="dataList" value="#{sessionListWiew.selectedCourseSessionList}" var="courseSession">
+			        #{courseSession.course.code}<br/>
+			        #{courseSession.course.title}<br/>
+			        #{courseSession.location.city}<br/>
+			        #{courseSession.startDate} - #{courseSession.endDate}<br/>
+			    </p:dataList>
+			    
+			    
+			</h:form>
+		</p:panel>
+	
+	</h:body>
+</html>
