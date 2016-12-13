@@ -1,4 +1,4 @@
-package com.viewBeans;
+package com.utbm.lo54.viewBeans;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,9 +7,11 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import com.model.Course;
-import com.model.CourseSession;
-import com.model.Location;
+import com.utbm.lo54.formation_app.core.dao.CourseSessionDAO;
+import com.utbm.lo54.formation_app.core.dao.LocationDAO;
+import com.utbm.lo54.formation_app.core.entities.CourseSession;
+import com.utbm.lo54.formation_app.core.entities.Location;
+
 
 @ManagedBean
 @SessionScoped
@@ -36,36 +38,21 @@ public class SessionListWiew {
 	private List<CourseSession> courseSessionList;
 	private List<CourseSession> selectedCourseSessionList;
 	
-	@SuppressWarnings("deprecation")
 	public SessionListWiew() {
-		locationList = new ArrayList<>();
-		Location belfort = 	new Location(1, "Belfort");
-		Location hell = new Location(2, "L'Enfer");
-		Location paris = new Location(3, "Paris");
-		Location lyons = new Location(4, "Lyons");
 		
+		
+		LocationDAO locationDAO = new LocationDAO();
+		locationList = locationDAO.findAll();
 		selectedLocations = new ArrayList<>(locationList);
 		
-		locationList.add(belfort);
-		locationList.add(hell);
-		locationList.add(paris);
-		locationList.add(lyons);
-		
-		courseSessionList = new ArrayList<>();
-		courseSessionList.add(new CourseSession(1, new Course("LO54", "Framework Java"), belfort, new Date(2016-1900, 11, 12), new Date(2016-1900, 11, 15)));
-		courseSessionList.add(new CourseSession(2, new Course("BD51", "Caca"), hell, new Date(2016-1900, 11, 15), new Date(2016-1900, 11, 18)));
-		courseSessionList.add(new CourseSession(3, new Course("YOLOOOO", "C Cool"), belfort, new Date(2016-1900, 11, 12), new Date(2016-1900, 11, 20)));
-		
-		
+		CourseSessionDAO courseSessionDAO = new CourseSessionDAO();
+		courseSessionList = courseSessionDAO.findAll();
 		selectedCourseSessionList = new ArrayList<>(courseSessionList);
 		
 	}
 	
 	public void computFilter(){
-		
 		selectedCourseSessionList.clear();
-		
-		
 		for (CourseSession courseSession : courseSessionList) {
 			if(
 					(!courseCodeFilterSelected || courseSession.getCourse().getCode().toLowerCase().contains(courseCodeFilter.toLowerCase()))
@@ -157,7 +144,6 @@ public class SessionListWiew {
 
 	public List<CourseSession> getSelectedCourseSessionList() {
 		this.computFilter();
-		
 		return selectedCourseSessionList;
 	}
 

@@ -32,16 +32,17 @@
 					
 					<p:selectBooleanCheckbox value="#{sessionListWiew.locationFilterSelected}" immediate="true"/>
 					<h:outputText value="Location : "/>
-					<p:selectCheckboxMenu id="locationSelectCheckboxMenuId"
+					<p:selectCheckboxMenu
 					value="#{sessionListWiew.selectedLocations}"
 					converter="locationConverter"
 					filter="true" filterMatchMode="startsWith"
-					label="Cities" updateLabel="true" >
+					updateLabel="true"
+					label="Cities">
 						<f:selectItems value="#{sessionListWiew.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/>
 					</p:selectCheckboxMenu>
 					
 				</h:panelGrid>
-				<p:commandButton type="submit" id="button3" value="search" update="dataListForm"/>
+				<p:commandButton type="submit" value="search" update="dataListForm"/>
 			</h:form>
 		</p:panel>
 		
