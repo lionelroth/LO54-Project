@@ -1,6 +1,5 @@
-package com.converters;
+package com.utbm.lo54.converters;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -10,7 +9,8 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import com.model.Location;
+import com.utbm.lo54.formation_app.core.dao.LocationDAO;
+import com.utbm.lo54.formation_app.core.entities.Location;
 
 @FacesConverter("locationConverter")
 public class LocationConverter implements Converter{
@@ -24,26 +24,13 @@ public class LocationConverter implements Converter{
     public Object getAsObject(FacesContext context, UIComponent component, String newValue) {
 		
 		
-		// TODO : lien avec la BDD pour retrouver la location a partir du nom
-		
-		List<Location> locationList = new ArrayList<>();
-		Location belfort = 	new Location(1, "Belfort");
-		Location hell = new Location(2, "L'Enfer");
-		Location paris = new Location(3, "Paris");
-		Location lyons = new Location(4, "Lyons");
-
-		locationList.add(belfort);
-		locationList.add(hell);
-		locationList.add(paris);
-		locationList.add(lyons);
-		
-		for (Location location : locationList) {
-			if(location.getCity().equals(newValue)){
+		LocationDAO locationDAO = new LocationDAO();
+    	List<Location> locations = locationDAO.findAll();
+    	for (Location location : locations){
+    		if(location.getCity().equals(newValue)){
 				return location;
 			}
-		}
-		
-		// --------------------------
+    	}
 		
 		
         return null;
