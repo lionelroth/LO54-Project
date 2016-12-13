@@ -1,15 +1,20 @@
 package com.utbm.lo54.formation_app.core;
 
+import java.util.Date;
 import java.util.List;
 
-import com.utbm.lo54.formation_app.core.dao.ClientDAO;
-import com.utbm.lo54.formation_app.core.dao.CourseDAO;
-import com.utbm.lo54.formation_app.core.dao.CourseSessionDAO;
-import com.utbm.lo54.formation_app.core.dao.LocationDAO;
 import com.utbm.lo54.formation_app.core.entities.Client;
 import com.utbm.lo54.formation_app.core.entities.Course;
 import com.utbm.lo54.formation_app.core.entities.CourseSession;
 import com.utbm.lo54.formation_app.core.entities.Location;
+import com.utbm.lo54.formation_app.core.service.impl.ClientServiceImpl;
+import com.utbm.lo54.formation_app.core.service.impl.CourseServiceImpl;
+import com.utbm.lo54.formation_app.core.service.impl.CourseSessionServiceImpl;
+import com.utbm.lo54.formation_app.core.service.impl.LocationServiceImpl;
+import com.utbm.lo54.formation_app.core.service.interfaces.ClientService;
+import com.utbm.lo54.formation_app.core.service.interfaces.CourseService;
+import com.utbm.lo54.formation_app.core.service.interfaces.CourseSessionService;
+import com.utbm.lo54.formation_app.core.service.interfaces.LocationService;
 
 
 public class App
@@ -48,64 +53,64 @@ public class App
 //    	Client client1 = new Client(1, courseSession3 , "Cartier", "Faustin", "5, rue Grande Fusterie 69500 BRON", "0438802613", "FaustinCartier@dayrep.com");
 //    	Client client2 = new Client(2, courseSession6 , "Chartré", "Hardouin", "83, Chemin Des Bateliers 16000 ANGOULÊME", "0520069206", "HardouinChartre@jourrapide.com");
 //    	
-//    	LocationDAO locationDAO = new LocationDAO();
-//    	locationDAO.create(location1);
-//    	locationDAO.create(location2);
-//    	locationDAO.create(location3);
-//    	locationDAO.create(location4);
-//    	locationDAO.create(location5);
-//    	locationDAO.create(location6);
+//    	LocationService locationService = new LocationServiceImpl();
+//    	locationService.persist(location1);
+//    	locationService.persist(location2);
+//    	locationService.persist(location3);
+//    	locationService.persist(location4);
+//    	locationService.persist(location5);
+//    	locationService.persist(location6);
 //    	
-//    	CourseDAO courseDAO = new CourseDAO();
-//    	courseDAO.create(course1);
-//    	courseDAO.create(course2);
-//    	courseDAO.create(course3);
-//    	courseDAO.create(course4);
-//    	courseDAO.create(course5);
-//    	courseDAO.create(course6);
-//    	courseDAO.create(course7);
+//    	CourseService courseService = new CourseServiceImpl();
+//    	courseService.persist(course1);
+//    	courseService.persist(course2);
+//    	courseService.persist(course3);
+//    	courseService.persist(course4);
+//    	courseService.persist(course5);
+//    	courseService.persist(course6);
+//    	courseService.persist(course7);
 //    	
-//    	CourseSessionDAO courseSessionDAO = new CourseSessionDAO();
-//    	courseSessionDAO.create(courseSession1);
-//    	courseSessionDAO.create(courseSession2);
-//    	courseSessionDAO.create(courseSession3);
-//    	courseSessionDAO.create(courseSession4);
-//    	courseSessionDAO.create(courseSession5);
-//    	courseSessionDAO.create(courseSession6);
-//    	courseSessionDAO.create(courseSession7);
-//    	courseSessionDAO.create(courseSession8);
-//    	courseSessionDAO.create(courseSession9);
-//    	courseSessionDAO.create(courseSession10);
+//    	CourseSessionService courseSessionService = new CourseSessionServiceImpl();
+//    	courseSessionService.persist(courseSession1);
+//    	courseSessionService.persist(courseSession2);
+//    	courseSessionService.persist(courseSession3);
+//    	courseSessionService.persist(courseSession4);
+//    	courseSessionService.persist(courseSession5);
+//    	courseSessionService.persist(courseSession6);
+//    	courseSessionService.persist(courseSession7);
+//    	courseSessionService.persist(courseSession8);
+//    	courseSessionService.persist(courseSession9);
+//    	courseSessionService.persist(courseSession10);
 //    	
-//    	ClientDAO clientDao = new ClientDAO();
-//    	clientDao.create(client1);
-//    	clientDao.create(client2);
+//    	ClientService clientDao = new ClientServiceImpl();
+//    	clientDao.persist(client1);
+//    	clientDao.persist(client2);
     	
     	/* SEARCHING */
     	
-    	LocationDAO locationDAO = new LocationDAO();
-    	List<Location> locations = locationDAO.findAll();
+    	LocationService locationService = new LocationServiceImpl();
+    	List<Location> locations = locationService.findAll();
     	System.out.println("Listing all locations known in the DB : ");
     	for (Location loc : locations){
     		System.out.println("\t- "+loc.toString());
     	}
     	
-    	ClientDAO clientDAO = new ClientDAO();
-    	List<Client> clients = clientDAO.findAll();
+    	ClientService clientService = new ClientServiceImpl();
+    	List<Client> clients = clientService.findAll();
     	System.out.println("Listing all clients known in the DB : ");
     	for (Client cli : clients){
     		System.out.println("\t- "+cli.toString());
     	}
     	
-    	CourseDAO courseDAO = new CourseDAO();
-    	List<Course> courses = courseDAO.findAll();
+    	CourseService courseService = new CourseServiceImpl();
+    	List<Course> courses = courseService.findAll();
     	System.out.println("Listing all courses known in the DB : ");
     	for (Course course : courses){
     		System.out.println("\t- "+course.toString());
     	}
     	
-    	CourseSessionDAO courseSessionDAO = new CourseSessionDAO();
-    	List<CourseSession> sessions = courseSessionDAO.findAll();
+    	CourseSessionService courseSessionService = new CourseSessionServiceImpl();
+    	List<CourseSession> sessions = courseSessionService.findAll();
     	System.out.println("Listing all sessions known in the DB : ");
     	for (CourseSession session: sessions){
     		System.out.println("\t- "+session.toString());

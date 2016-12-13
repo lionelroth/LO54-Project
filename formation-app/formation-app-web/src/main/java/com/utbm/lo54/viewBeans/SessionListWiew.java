@@ -7,10 +7,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import com.utbm.lo54.formation_app.core.dao.CourseSessionDAO;
-import com.utbm.lo54.formation_app.core.dao.LocationDAO;
 import com.utbm.lo54.formation_app.core.entities.CourseSession;
 import com.utbm.lo54.formation_app.core.entities.Location;
+import com.utbm.lo54.formation_app.core.service.impl.CourseSessionServiceImpl;
+import com.utbm.lo54.formation_app.core.service.impl.LocationServiceImpl;
+import com.utbm.lo54.formation_app.core.service.interfaces.CourseSessionService;
+import com.utbm.lo54.formation_app.core.service.interfaces.LocationService;
 
 
 @ManagedBean
@@ -22,7 +24,7 @@ public class SessionListWiew {
 	private String courseCodeFilter = "";
 	
 	private boolean courseTitleFilterSelected = false;
-	private String courseTiteleFilter = "";
+	private String courseTitleFilter = "";
 	
 	private boolean dateMiniSeleted = false;
 	private Date dateMini = new Date();
@@ -40,24 +42,23 @@ public class SessionListWiew {
 	
 	public SessionListWiew() {
 		
-		
-		LocationDAO locationDAO = new LocationDAO();
-		locationList = locationDAO.findAll();
+		LocationService locationService = new LocationServiceImpl();
+		locationList = locationService.findAll();
 		selectedLocations = new ArrayList<>(locationList);
 		
-		CourseSessionDAO courseSessionDAO = new CourseSessionDAO();
-		courseSessionList = courseSessionDAO.findAll();
+		CourseSessionService courseSessionService = new CourseSessionServiceImpl();
+		courseSessionList = courseSessionService.findAll();
 		selectedCourseSessionList = new ArrayList<>(courseSessionList);
 		
 	}
 	
-	public void computFilter(){
+	public void computeFilter(){
 		selectedCourseSessionList.clear();
 		for (CourseSession courseSession : courseSessionList) {
 			if(
 					(!courseCodeFilterSelected || courseSession.getCourse().getCode().toLowerCase().contains(courseCodeFilter.toLowerCase()))
 					&&
-					(!courseTitleFilterSelected || courseSession.getCourse().getTitle().toLowerCase().contains(courseTiteleFilter.toLowerCase()))
+					(!courseTitleFilterSelected || courseSession.getCourse().getTitle().toLowerCase().contains(courseTitleFilter.toLowerCase()))
 					&&
 					(!dateMiniSeleted || dateMini.compareTo(courseSession.getStartDate())<=0)
 					&&
@@ -95,11 +96,11 @@ public class SessionListWiew {
 	}
 
 	public String getCourseTiteleFilter() {
-		return courseTiteleFilter;
+		return courseTitleFilter;
 	}
 
 	public void setCourseTiteleFilter(String courseTiteleFilter) {
-		this.courseTiteleFilter = courseTiteleFilter;
+		this.courseTitleFilter = courseTiteleFilter;
 	}
 
 	public boolean isDateMiniSeleted() {
@@ -143,7 +144,7 @@ public class SessionListWiew {
 	}
 
 	public List<CourseSession> getSelectedCourseSessionList() {
-		this.computFilter();
+		this.computeFilter();
 		return selectedCourseSessionList;
 	}
 
@@ -180,7 +181,7 @@ public class SessionListWiew {
 	public String toString() {
 		return "SessionListWiew [courseCodeFilterSelected=" + courseCodeFilterSelected + ", courseCodeFilter="
 				+ courseCodeFilter + ", courseTitleFilterSelected=" + courseTitleFilterSelected
-				+ ", courseTiteleFilter=" + courseTiteleFilter + ", dateMiniSeleted=" + dateMiniSeleted + ", dateMini="
+				+ ", courseTiteleFilter=" + courseTitleFilter + ", dateMiniSeleted=" + dateMiniSeleted + ", dateMini="
 				+ dateMini + ", dateMaxiSeleted=" + dateMaxiSeleted + ", dateMaxi=" + dateMaxi
 				+ ", locationFilterSelected=" + locationFilterSelected + ", selectedLocations=" + selectedLocations
 				+ ", locationList=" + locationList + ", courseSessionList=" + courseSessionList
