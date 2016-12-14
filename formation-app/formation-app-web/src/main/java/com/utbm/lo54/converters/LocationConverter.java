@@ -14,15 +14,9 @@ import com.utbm.lo54.formation_app.core.entities.Location;
 
 @FacesConverter("locationConverter")
 public class LocationConverter implements Converter{
-	
-	
-	
-	
-	
-	
+
 	@Override
     public Object getAsObject(FacesContext context, UIComponent component, String newValue) {
-		
 		
 		LocationDAO locationDAO = new LocationDAO();
     	List<Location> locations = locationDAO.findAll();
@@ -31,7 +25,6 @@ public class LocationConverter implements Converter{
 				return location;
 			}
     	}
-		
 		
         return null;
     }

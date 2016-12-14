@@ -33,12 +33,14 @@ public class SessionListView {
 	private Date dateMaxi = new Date();
 	
 	private boolean locationFilterSelected = false;
-	private List<Location > selectedLocations;
+	private List<Location> selectedLocations;
 	
 	private List<Location> locationList;
 	
 	private List<CourseSession> courseSessionList;
 	private List<CourseSession> selectedCourseSessionList;
+	
+	private String searchRecap = "Liste de toutes les sessions disponibles";
 	
 	public SessionListView() {
 		
@@ -77,12 +79,51 @@ public class SessionListView {
 	}
 	
 	/** YOLO SWAG TESTS */
-	public void ecoute(){
-		System.out.println("*********************************");
-		System.out.println(courseCodeFilterSelected + courseCodeFilter);;
-		System.out.println(courseTitleFilterSelected + courseTitleFilter);;
+	public void search(){
+		computeSearchRecap();
+		System.out.println(searchRecap);
 	}
 	
+	/** Pour construire automatiquement un récapitulatif des paramètres de recherche. */
+	private void computeSearchRecap() {
+		StringBuilder sb = new StringBuilder();
+		if (courseCodeFilterSelected){
+			if (courseCodeFilter.isEmpty()){
+				sb.append("- Tous les codes de cours ");
+			} else {
+				sb.append("- Code contenant '" + courseCodeFilter + "' ");
+			}
+		}
+		if (courseTitleFilterSelected){
+			if (courseCodeFilter.isEmpty()){
+				sb.append("- Tous les titres de cours ");
+			} else {
+				sb.append("- Titre contenant '" + courseTitleFilter + "' ");
+			}
+		}
+		if (dateMiniSeleted){
+			sb.append("- Commençant après le " + dateMini.toString() + " ");
+		}
+		if (dateMaxiSeleted){
+			sb.append("- Terminant avant le " + dateMaxi.toString() + " ");
+		}
+		if (locationFilterSelected){
+			if (selectedLocations.isEmpty()){
+				sb.append("- Quel que soit le lieu ");
+			} else {
+				sb.append("- Lieux choisis : ");
+				for (Location location : selectedLocations){
+					sb.append(location.getCity()+ " ");
+				}
+			}
+		}
+		if (sb.length() == 0){
+			sb.append("- Liste de toutes les sessions disponibles");
+		}
+		this.searchRecap = "Résultats de la recherche " + sb.toString();
+		System.out.println(sb.toString());
+	}
+
 	public boolean isCourseCodeFilterSelected() {
 		return courseCodeFilterSelected;
 	}
@@ -189,6 +230,14 @@ public class SessionListView {
 	}
 
 
+	public String getSearchRecap() {
+		return searchRecap;
+	}
+
+	public void setSearchRecap(String searchRecap) {
+		this.searchRecap = searchRecap;
+	}
+
 	@Override
 	public String toString() {
 		return "SessionListWiew [courseCodeFilterSelected=" + courseCodeFilterSelected + ", courseCodeFilter="
@@ -200,17 +249,4 @@ public class SessionListView {
 				+ ", selectedCourseSessionList=" + selectedCourseSessionList + "]";
 	}
 
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

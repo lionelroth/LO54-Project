@@ -30,7 +30,7 @@
 					</h:panelGroup>
 					
 					<p:selectBooleanCheckbox id="truc" value="#{sessionListWiew.courseTitleFilterSelected}">
-<!-- 						<p:ajax event="change" update="researchTitlePanel" /> -->
+						<p:ajax event="change" update="researchTitlePanel" />
 					</p:selectBooleanCheckbox>
 					<h:outputText value="Recherche par mot-clé du titre "/>
 					<h:panelGroup id="researchTitlePanel">
@@ -39,34 +39,34 @@
 						</p:inputText>
 					</h:panelGroup>
 					
-<!-- 					<p:selectBooleanCheckbox value="#{sessionListWiew.dateMiniSeleted}" /> -->
-<!-- 					<h:outputText value="Date Debut minimum : "/> -->
-<!-- 					<p:calendar value="#{sessionListWiew.dateMini}" rendered="#{sessionListWiew.dateMiniSeleted}"/> -->
+					<p:selectBooleanCheckbox value="#{sessionListWiew.dateMiniSeleted}" />
+					<h:outputText value="Date Debut minimum : "/>
+					<p:calendar value="#{sessionListWiew.dateMini}" />
 					
-<!-- 					<p:selectBooleanCheckbox value="#{sessionListWiew.dateMaxiSeleted}" /> -->
-<!-- 					<h:outputText value="Date Fin maximum : "/> -->
-<!-- 					<p:calendar value="#{sessionListWiew.dateMaxi}" /> -->
+					<p:selectBooleanCheckbox value="#{sessionListWiew.dateMaxiSeleted}" />
+					<h:outputText value="Date Fin maximum : "/>
+					<p:calendar value="#{sessionListWiew.dateMaxi}" />
 					
-<!-- 					<p:selectBooleanCheckbox value="#{sessionListWiew.locationFilterSelected}" immediate="true"/> -->
-<!-- 					<h:outputText value="Recherche par lieux "/> -->
-<!-- 					<p:selectCheckboxMenu -->
-<!-- 					value="#{sessionListWiew.selectedLocations}" -->
-<!-- 					converter="locationConverter" -->
-<!-- 					filter="true" filterMatchMode="startsWith" -->
-<!-- 					updateLabel="true" -->
-<!-- 					label="Cities"> -->
-<!-- 						<f:selectItems value="#{sessionListWiew.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/> -->
-<!-- 					</p:selectCheckboxMenu> -->
+					<p:selectBooleanCheckbox value="#{sessionListWiew.locationFilterSelected}" immediate="true"/>
+					<h:outputText value="Recherche par lieux "/>
+					<p:selectCheckboxMenu
+					value="#{sessionListWiew.selectedLocations}"
+					converter="locationConverter"
+					filter="true" filterMatchMode="startsWith"
+					updateLabel="true"
+					label="Cities">
+						<f:selectItems value="#{sessionListWiew.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/>
+					</p:selectCheckboxMenu>
 					
 				</h:panelGrid>
 	
-				<p:commandButton type="submit" value="search" update="dataListForm" actionListener="#{sessionListWiew.ecoute}"/>
+				<p:commandButton type="submit" value="Rechercher" update="results" actionListener="#{sessionListWiew.search}"/>
 			</h:form>
 		</p:panel>
 		
 		
 		
-		<p:panel header="List">	
+		<p:panel id="results" header="#{sessionListWiew.searchRecap}">	
 			<h:form id="dataListForm">
 			    <p:dataList id="dataList" value="#{sessionListWiew.selectedCourseSessionList}" var="courseSession">
 			        #{courseSession.course.code}<br/>
