@@ -15,9 +15,9 @@ import com.utbm.lo54.formation_app.core.service.interfaces.CourseSessionService;
 import com.utbm.lo54.formation_app.core.service.interfaces.LocationService;
 
 
-@ManagedBean
+@ManagedBean (name="sessionListWiew")
 @SessionScoped
-public class SessionListWiew {
+public class SessionListView {
 	
 
 	private boolean courseCodeFilterSelected = false;
@@ -40,7 +40,7 @@ public class SessionListWiew {
 	private List<CourseSession> courseSessionList;
 	private List<CourseSession> selectedCourseSessionList;
 	
-	public SessionListWiew() {
+	public SessionListView() {
 		
 		LocationService locationService = new LocationServiceImpl();
 		locationList = locationService.findAll();
@@ -71,6 +71,18 @@ public class SessionListWiew {
 		}
 	}
 
+	/** YOLO SWAG TESTS */
+	public void titleSearchUpdated(){
+		courseTitleFilterSelected = true;
+	}
+	
+	/** YOLO SWAG TESTS */
+	public void ecoute(){
+		System.out.println("*********************************");
+		System.out.println(courseCodeFilterSelected + courseCodeFilter);;
+		System.out.println(courseTitleFilterSelected + courseTitleFilter);;
+	}
+	
 	public boolean isCourseCodeFilterSelected() {
 		return courseCodeFilterSelected;
 	}
