@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Client List</title>
+		<style>
+            .tableTest { height: 200%; background: yellow; margin-bottom:10px; }
+            .tableTest tr td{
+	    		height: 35px; 
+			}
+        </style>
+	</h:head>
+	<h:body>
+	
+		<p:panel header="Filter" id="filterPanel">
+			<h:form id="filtersForm">
+		
+				<h:panelGrid id="panelId" columns="3" styleClass="tableTest" cellpadding="5">
+					<p:selectBooleanCheckbox value="#{sessionListWiew.courseCodeFilterSelected}" >
+<!-- +add listener pr setter la valeur actu dans le bean sinon il remet la derniere submittée qd check/uncheck -->
+						<p:ajax event="change" update="researchCodePanel" /> 
+					</p:selectBooleanCheckbox>
+					<p:outputLabel value="Recherche par code de formation "/>
+					<h:panelGroup id="researchCodePanel">
+						<p:inputText id="researchCodeInput" value="#{sessionListWiew.courseCodeFilter}" rendered="#{sessionListWiew.courseCodeFilterSelected}"/>
+					</h:panelGroup>
+					
+					<p:selectBooleanCheckbox id="truc" value="#{sessionListWiew.courseTitleFilterSelected}">
+<!-- 						<p:ajax event="change" update="researchTitlePanel" /> -->
+					</p:selectBooleanCheckbox>
+					<h:outputText value="Recherche par mot-clé du titre "/>
+					<h:panelGroup id="researchTitlePanel">
+						<p:inputText value="#{sessionListWiew.courseTiteleFilter}">
+							<p:ajax event="change" listener="#{sessionListWiew.titleSearchUpdated}" update="truc" />
+						</p:inputText>
+					</h:panelGroup>
+					
+<!-- 					<p:selectBooleanCheckbox value="#{sessionListWiew.dateMiniSeleted}" /> -->
+<!-- 					<h:outputText value="Date Debut minimum : "/> -->
+<!-- 					<p:calendar value="#{sessionListWiew.dateMini}" rendered="#{sessionListWiew.dateMiniSeleted}"/> -->
+					
+<!-- 					<p:selectBooleanCheckbox value="#{sessionListWiew.dateMaxiSeleted}" /> -->
+<!-- 					<h:outputText value="Date Fin maximum : "/> -->
+<!-- 					<p:calendar value="#{sessionListWiew.dateMaxi}" /> -->
+					
+<!-- 					<p:selectBooleanCheckbox value="#{sessionListWiew.locationFilterSelected}" immediate="true"/> -->
+<!-- 					<h:outputText value="Recherche par lieux "/> -->
+<!-- 					<p:selectCheckboxMenu -->
+<!-- 					value="#{sessionListWiew.selectedLocations}" -->
+<!-- 					converter="locationConverter" -->
+<!-- 					filter="true" filterMatchMode="startsWith" -->
+<!-- 					updateLabel="true" -->
+<!-- 					label="Cities"> -->
+<!-- 						<f:selectItems value="#{sessionListWiew.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/> -->
+<!-- 					</p:selectCheckboxMenu> -->
+					
+				</h:panelGrid>
+	
+				<p:commandButton type="submit" value="search" update="dataListForm" actionListener="#{sessionListWiew.ecoute}"/>
+			</h:form>
+		</p:panel>
+		
+		
+		
+		<p:panel header="List">	
+			<h:form id="dataListForm">
+			    <p:dataList id="dataList" value="#{sessionListWiew.selectedCourseSessionList}" var="courseSession">
+			        #{courseSession.course.code}<br/>
+			        #{courseSession.course.title}<br/>
+			        #{courseSession.location.city}<br/>
+			        #{courseSession.startDate} - #{courseSession.endDate}<br/>
+			    </p:dataList>
+			</h:form>
+		</p:panel>
+	
+	</h:body>
+</html>
