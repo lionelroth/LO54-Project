@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Inscription</title>
+		<style>
+			.column1 {
+			     width: 150px;
+			}
+			
+			.column2 {
+			     width: 200px;
+			}
+		</style>
+	</h:head>
+	
+	<h:body>
+		<p:panel header="Filter" id="filterPanel">
+			<h:outputText value="Test id : " />
+			<h:outputText value="#{subscriptionView.sessionId}" />
+		</p:panel>
+		
+		<p:tooltip />
+		
+		<h:form id="infos">
+			<p:panel header="Informations utilisateur">
+				<h:panelGrid id="grid" columns="3" cellpadding="5" columnClasses="column1, column2">
+				
+					<p:outputLabel for="firstname" value="Prénom " />                    
+		            <p:inputText id="firstname" value="#{subscriptionView.client.firstname}" 
+		            	required="true" label="Prénom" size="20"
+		            	requiredMessage="Veuillez renseigner votre prénom."/>
+		            <p:message for="firstname" display="tooltip" />
+				
+					<p:outputLabel for="lastname" value="Nom " />                    
+		            <p:inputText id="lastname" value="#{subscriptionView.client.lastname}" 
+		            	required="true" label="Nom" size="20"
+		            	requiredMessage="Veuillez renseigner votre nom."/>
+		            <p:message for="lastname" display="tooltip" />
+				
+					<p:outputLabel for="address" value="Adresse " />                    
+		            <p:inputText id="address" value="#{subscriptionView.client.address}" 
+		            	required="true" label="Adresse" size="100"
+		            	requiredMessage="Veuillez renseigner votre adresse."/>
+		            <p:message for="address" display="tooltip"/>
+				
+					<p:outputLabel for="phone" value="Téléphone " />                    
+		            <p:inputText id="phone" value="#{subscriptionView.client.phone}" 
+		            	required="true" label="Telephone" size="10"
+		            	requiredMessage="Veuillez renseigner votre numéro de téléphone."/>
+		            <p:message for="phone" display="tooltip"/>
+		            
+					<p:outputLabel for="email" value="Email " />
+					<p:inputText id="email" required="true" label="Email" size="60"
+						requiredMessage="Veuillez renseigner votre adresse mail."
+						validatorMessage="Format de mail invalide."
+						value="#{subscriptionView.client.email}">
+					  <f:validateRegex
+						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+					<p:message for="email" display="tooltip"/>
+					
+					<p:commandButton type="submit" value="OK" update="infos" action="#{subscriptionView.askValidation}"/>
+				</h:panelGrid>
+			</p:panel>
+
+	   </h:form>
+	</h:body>
+</html>

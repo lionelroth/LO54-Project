@@ -14,34 +14,34 @@
 			<h:form id="filtersForm">
 			
 				<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
-					<p:selectBooleanCheckbox value="#{sessionListWiew.courseCodeFilterSelected}"/>
+					<p:selectBooleanCheckbox value="#{sessionListView.courseCodeFilterSelected}"/>
 					<h:outputText value="Filtre code : "/>
-					<p:inputText value="#{sessionListWiew.courseCodeFilter}"/>
+					<p:inputText value="#{sessionListView.courseCodeFilter}"/>
 					
-					<p:selectBooleanCheckbox value="#{sessionListWiew.courseTitleFilterSelected}" />
+					<p:selectBooleanCheckbox value="#{sessionListView.courseTitleFilterSelected}" />
 					<h:outputText value="Filtre titre : "/>
-					<p:inputText value="#{sessionListWiew.courseTiteleFilter}"/>
+					<p:inputText value="#{sessionListView.courseTitleFilter}"/>
 					
-					<p:selectBooleanCheckbox value="#{sessionListWiew.dateMiniSeleted}" />
+					<p:selectBooleanCheckbox value="#{sessionListView.dateMiniSeleted}" />
 					<h:outputText value="Date Debut minimum : "/>
-					<p:calendar value="#{sessionListWiew.dateMini}" />
+					<p:calendar value="#{sessionListView.dateMini}" />
 					
-					<p:selectBooleanCheckbox value="#{sessionListWiew.dateMaxiSeleted}" />
+					<p:selectBooleanCheckbox value="#{sessionListView.dateMaxiSeleted}" />
 					<h:outputText value="Date Fin maximum : "/>
-					<p:calendar value="#{sessionListWiew.dateMaxi}" />
+					<p:calendar value="#{sessionListView.dateMaxi}" />
 					
-					<p:selectBooleanCheckbox value="#{sessionListWiew.locationFilterSelected}" immediate="true"/>
+					<p:selectBooleanCheckbox value="#{sessionListView.locationFilterSelected}" immediate="true"/>
 					<h:outputText value="Location : "/>
 					<p:selectCheckboxMenu id="locationSelectCheckboxMenuId"
-					value="#{sessionListWiew.selectedLocations}"
+					value="#{sessionListView.selectedLocations}"
 					converter="locationConverter"
 					filter="true" filterMatchMode="startsWith"
-					label="Cities" updateLabel="true" >
-						<f:selectItems value="#{sessionListWiew.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/>
+					label="Cities" updateLabel="false" >
+						<f:selectItems value="#{sessionListView.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/>
 					</p:selectCheckboxMenu>
 					
 				</h:panelGrid>
-				<p:commandButton type="submit" id="button3" value="search" update="dataListForm" actionListener="#{sessionListWiew.search}"/>
+				<p:commandButton type="submit" id="button3" value="search" update="dataListForm" actionListener="#{sessionListView.search}"/>
 			</h:form>
 		</p:panel>
 		
@@ -49,7 +49,7 @@
 		
 		<p:panel header="List">	
 			<h:form id="dataListForm">
-			    <p:dataList id="dataList" value="#{sessionListWiew.selectedCourseSessionList}" var="courseSession">
+			    <p:dataList id="dataList" value="#{sessionListView.selectedCourseSessionList}" var="courseSession">
 			        #{courseSession.course.code}<br/>
 			        #{courseSession.course.title}<br/>
 			        #{courseSession.location.city}<br/>

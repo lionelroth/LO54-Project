@@ -15,7 +15,7 @@ import com.utbm.lo54.formation_app.core.service.interfaces.CourseSessionService;
 import com.utbm.lo54.formation_app.core.service.interfaces.LocationService;
 
 
-@ManagedBean (name="sessionListWiew")
+@ManagedBean (name="sessionListView")
 @SessionScoped
 public class SessionListView {
 	
@@ -123,7 +123,13 @@ public class SessionListView {
 		this.searchRecap = "Résultats de la recherche " + sb.toString();
 		System.out.println(sb.toString());
 	}
+	
+	public String goToSubscription(){
+		return "inscription?faces-redirect=true";
+	}
 
+
+	
 	public boolean isCourseCodeFilterSelected() {
 		return courseCodeFilterSelected;
 	}
@@ -146,14 +152,6 @@ public class SessionListView {
 
 	public void setCourseTitleFilterSelected(boolean courseTitleFilterSelected) {
 		this.courseTitleFilterSelected = courseTitleFilterSelected;
-	}
-
-	public String getCourseTiteleFilter() {
-		return courseTitleFilter;
-	}
-
-	public void setCourseTiteleFilter(String courseTiteleFilter) {
-		this.courseTitleFilter = courseTiteleFilter;
 	}
 
 	public boolean isDateMiniSeleted() {
@@ -236,6 +234,15 @@ public class SessionListView {
 
 	public void setSearchRecap(String searchRecap) {
 		this.searchRecap = searchRecap;
+	}
+
+
+	public String getCourseTitleFilter() {
+		return courseTitleFilter;
+	}
+
+	public void setCourseTitleFilter(String courseTitleFilter) {
+		this.courseTitleFilter = courseTitleFilter;
 	}
 
 	@Override

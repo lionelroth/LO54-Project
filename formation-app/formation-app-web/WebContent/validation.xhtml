@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Validation</title>
+	</h:head>
+	
+	<h:body>
+        <h:form>
+        	<p:growl id="growl" life="2000" />
+			<p:panel id="recap" header="Récapitulatif">
+				<h:panelGrid id="grid" columns="2" cellpadding="5">
+				
+					<h:outputLabel for="firstname" value="Prénom : " />                    
+		            <h:outputText id="firstname" value="#{subscriptionView.client.firstname}" />
+				
+					<h:outputLabel for="lastname" value="Nom : " />                    
+		            <h:outputText id="lastname" value="#{subscriptionView.client.lastname}" />
+				
+					<h:outputLabel for="address" value="Adresse : " />                    
+		            <h:outputText id="address" value="#{subscriptionView.client.address}" />
+				
+					<h:outputLabel for="phone" value="Téléphone : " />                    
+		            <h:outputText id="phone" value="#{subscriptionView.client.phone}" />
+				
+					<h:outputLabel for="mail" value="Mail : " />                    
+		            <h:outputText id="mail" value="#{subscriptionView.client.email}" />
+		            
+		            <h:outputLabel for="course" value="Cours souhaité : " />                    
+		            <h:outputText id="course" value="#{subscriptionView.client.courseSession.course.code} : #{subscriptionView.client.courseSession.course.title}" />
+		            
+					<p:commandButton value="Valider l'inscription" update="growl" actionListener="#{subscriptionView.validateSub}"/>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</h:body>
+</html>
