@@ -44,7 +44,8 @@ public class SubscriptionView {
 		System.out.println("Persistence call...");
 		ClientService clientService= new ClientServiceImpl();
 		clientService.persist(client);
-		addMessage("Inscription réalisée avec succés !");
+		addMessage("Inscription réalisée avec succès !");
+		
 		return "sessions?faces-redirect=true";
     }
      
@@ -68,5 +69,7 @@ public class SubscriptionView {
 	public void setClient(Client client) {
 		this.client = client;
 	}
+	
+	
 
 }

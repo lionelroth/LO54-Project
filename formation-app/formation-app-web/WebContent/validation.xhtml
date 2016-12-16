@@ -33,8 +33,10 @@
 		            <h:outputLabel for="course" value="Cours souhaité : " />                    
 		            <h:outputText id="course" value="#{subscriptionView.client.courseSession.course.code} : #{subscriptionView.client.courseSession.course.title}" />
 		            
-					<p:commandButton value="Valider l'inscription" update="growl" actionListener="#{subscriptionView.validateSub}"/>
+					<p:commandButton id="validateButton" value="Valider l'inscription" update="growl" actionListener="#{subscriptionView.validateSub}"/>
 				</h:panelGrid>
+				
+				
 			</p:panel>
 		</h:form>
 	</h:body>

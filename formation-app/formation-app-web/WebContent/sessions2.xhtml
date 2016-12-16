@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Session List</title>
+		<style>
+            .tableTest { height: 200%; margin-bottom:10px; }
+            .tableTest tr td{
+ 	    		height: 35px;  
+			}
+        </style>
+        
+	</h:head>
+	<h:body>
+	
+		<h1 align="center">Listes des sessions</h1>
+	
+		<p:panel header="Filter" styleClass="tableTest" toggleable="true">
+			<h:form>
+		
+				<h:panelGrid id="panelId" columns="3" cellpadding="5">
+					<p:selectBooleanCheckbox id="codeFilterCheckbox" value="#{sessionListView.courseCodeFilterSelected}" />
+					<p:outputLabel value="Recherche par code de formation "/>
+					<p:inputText id="researchCodeInput" value="#{sessionListView.courseCodeFilter}">
+						<p:ajax event="change" listener="#{sessionListView.codeSearchUpdated}" update="codeFilterCheckbox" />
+					</p:inputText>
+					
+					<p:selectBooleanCheckbox id="titleFilterCheckbox" value="#{sessionListView.courseTitleFilterSelected}"/>
+					<h:outputText value="Recherche par mot-clé du titre "/>
+					<p:inputText value="#{sessionListView.courseTitleFilter}">
+						<p:ajax event="change" listener="#{sessionListView.titleSearchUpdated}" update="titleFilterCheckbox" />
+					</p:inputText>
+					
+					<p:selectBooleanCheckbox id="dateMiniCheckbox" value="#{sessionListView.dateMiniSeleted}" />
+					<h:outputText value="Date Debut minimum : "/>
+					<p:calendar value="#{sessionListView.dateMini}" >
+						<p:ajax event="dateSelect" listener="#{sessionListView.dateMiniUpdated}" update="dateMiniCheckbox" />
+					</p:calendar>
+					
+					<p:selectBooleanCheckbox id="dateMaxiCheckbox" value="#{sessionListView.dateMaxiSeleted}" />
+					<h:outputText value="Date Fin maximum : "/>
+					<p:calendar value="#{sessionListView.dateMaxi}">
+						<p:ajax event="dateSelect" listener="#{sessionListView.dateMaxiUpdated}" update="dateMaxiCheckbox" />
+					</p:calendar>
+					
+					<p:selectBooleanCheckbox id="locationFilterCheckbox" value="#{sessionListView.locationFilterSelected}" immediate="true"/>
+					<h:outputText value="Recherche par lieux "/>
+					<p:selectCheckboxMenu
+					value="#{sessionListView.selectedLocations}"
+					converter="locationConverter"
+					filter="true" filterMatchMode="startsWith"
+					label="Cities">
+						<f:selectItems value="#{sessionListView.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/>
+						<p:ajax event="change" listener="#{sessionListView.locationFilterUpdated}" update="locationFilterCheckbox" />
+					</p:selectCheckboxMenu>
+					
+				</h:panelGrid>
+	
+				<p:commandButton type="submit" value="Rechercher" update="results" actionListener="#{sessionListView.search}"/>
+			</h:form>
+		</p:panel>
+		
+		
+		
+		<p:panel id="results" header="#{sessionListView.searchRecap}" styleClass="tableTest">	
+			<h:form>
+			    <p:dataTable id="dataList" value="#{sessionListView.selectedCourseSessionList}" var="courseSession">
+			        <p:column headerText="Code" style="width:80px">
+			        	<h:outputText value="#{courseSession.course.code}"/>
+		        	</p:column>
+		        	<p:column headerText="Titre">
+			        	<h:outputText value="#{courseSession.course.title}"/>
+			        </p:column>
+			        <p:column headerText="Ville" style="width:170px">
+			        	<h:outputText value="#{courseSession.location.city}"/>
+		        	</p:column>
+		        	<p:column headerText="Dates">
+			        	<h:outputText value="#{courseSession.startDate} / #{courseSession.endDate}"/>
+		        	</p:column>
+		        	<p:column>
+			        	<p:commandButton value="S'inscrire à cette session" style="font-size:15px" action="#{sessionListView.goToSubscription}">
+	        		 		<f:setPropertyActionListener target="#{subscriptionView.sessionId}" value="#{courseSession.id}"/>
+		        		</p:commandButton>
+		        	</p:column>
+			    </p:dataTable>
+			</h:form>
+		</p:panel>
+	
+	</h:body>
+</html>

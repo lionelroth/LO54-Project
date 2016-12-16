@@ -73,12 +73,22 @@ public class SessionListView {
 		}
 	}
 
-	/** YOLO SWAG TESTS */
+	public void codeSearchUpdated(){
+		courseCodeFilterSelected = true;
+	}
 	public void titleSearchUpdated(){
 		courseTitleFilterSelected = true;
 	}
+	public void dateMiniUpdated(){
+		dateMiniSeleted = true;
+	}
+	public void dateMaxiUpdated(){
+		dateMaxiSeleted = true;
+	}
+	public void locationFilterUpdated(){
+		locationFilterSelected = true;
+	}
 	
-	/** YOLO SWAG TESTS */
 	public void search(){
 		computeSearchRecap();
 		System.out.println(searchRecap);
