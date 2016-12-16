@@ -17,7 +17,7 @@
 	</h:head>
 	<h:body>
 	
-		<h1 align="center">Listes des sessions</h1>
+		<h1 align="center" class="title ui-widget-header ui-corner-all">Listes des sessions</h1>
 	
 		<p:panel header="Filter" styleClass="tableTest" toggleable="true">
 			<h:form>
@@ -82,7 +82,7 @@
 			        	<h:outputText value="#{courseSession.startDate} / #{courseSession.endDate}"/>
 		        	</p:column>
 		        	<p:column>
-			        	<p:commandButton value="S'inscrire à cette session" style="font-size:15px" action="#{sessionListView.goToSubscription}">
+			        	<p:commandButton value="S'inscrire à ce cours&#10;#{sessionListView.getRegisteredNumberForSession(courseSession.id)} inscrit(s)" style="white-space: pre;" action="#{sessionListView.goToSubscription}">
 	        		 		<f:setPropertyActionListener target="#{subscriptionView.sessionId}" value="#{courseSession.id}"/>
 		        		</p:commandButton>
 		        	</p:column>

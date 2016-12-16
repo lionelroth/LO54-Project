@@ -7,10 +7,13 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.utbm.lo54.formation_app.core.entities.Client;
 import com.utbm.lo54.formation_app.core.entities.CourseSession;
 import com.utbm.lo54.formation_app.core.entities.Location;
+import com.utbm.lo54.formation_app.core.service.impl.ClientServiceImpl;
 import com.utbm.lo54.formation_app.core.service.impl.CourseSessionServiceImpl;
 import com.utbm.lo54.formation_app.core.service.impl.LocationServiceImpl;
+import com.utbm.lo54.formation_app.core.service.interfaces.ClientService;
 import com.utbm.lo54.formation_app.core.service.interfaces.CourseSessionService;
 import com.utbm.lo54.formation_app.core.service.interfaces.LocationService;
 
@@ -138,7 +141,24 @@ public class SessionListView {
 		return "inscription?faces-redirect=true";
 	}
 
-
+	
+	public int getRegisteredNumberForSession(Integer courseSessionId){
+		int counter = 0;
+		
+		ClientService clientService = new ClientServiceImpl();
+		List<Client> clients = clientService.findAll();
+		
+		for (Client client : clients) {
+			if(client.getCourseSession().getId() == courseSessionId){
+				counter++;
+			}
+		}
+		
+		return counter;
+	}
+	
+	
+	// ------- getters and setters --------
 	
 	public boolean isCourseCodeFilterSelected() {
 		return courseCodeFilterSelected;
