@@ -88,13 +88,18 @@
 			        	<h:outputText value="#{courseSession.startDate} - #{courseSession.endDate}"/>
 		        	</p:column>
 		        	<p:column>
-			        	<p:commandButton value="S'inscrire à cette session" action="#{sessionListView.goToSubscription}">
-	        		 		<f:setPropertyActionListener target="#{subscriptionView.sessionId}" value="#{courseSession.id}"/>
+			        	<p:commandButton value="S'inscrire à cette session" update="testform" action="#{subscriptionView.updateSubscriptionSession(courseSession.id)}">
+<!-- 	        		 		<f:setPropertyActionListener target="#{subscriptionView.sessionId}" value="#{courseSession.id}"/> -->
 		        		</p:commandButton>
+		        		
 		        	</p:column>
 			    </p:dataTable>
+			    
 			</h:form>
-		</p:panel>
+			<h:form id="testform">
+<!-- 				<h:outputLabel value="#{subscriptionView.sessionId}" /> -->
+			</h:form>
+	</p:panel>
 	
 	</h:body>
 </html>

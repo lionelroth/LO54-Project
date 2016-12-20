@@ -137,9 +137,12 @@ public class SessionListView {
 		System.out.println(sb.toString());
 	}
 	
-	public String goToSubscription(){
-		return "inscription?faces-redirect=true";
+	public void goToSubscription(String id){
+		System.out.println("wtf : "+id);
 	}
+//	public String goToSubscription(){
+//		return "inscription?faces-redirect=true";
+//	}
 
 	
 	public int getRegisteredNumberForSession(Integer courseSessionId){

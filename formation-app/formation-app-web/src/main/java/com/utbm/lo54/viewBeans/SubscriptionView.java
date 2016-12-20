@@ -22,18 +22,26 @@ public class SubscriptionView {
 	
 	private Client client;
 	
-	@PostConstruct
-	public void init(){
-		//TODO à virer
-		sessionId = 2;
-		System.out.println(sessionId);
-		
+//	@PostConstruct
+//	public void init(){
+//		//TODO à virer
+//		if (sessionId == null)
+//			sessionId = 2;
+//		
+//		System.out.println("********** on init : "+sessionId);
+//		updateSubscriptionSession(sessionId);
+//	}
+	
+	public String updateSubscriptionSession(Integer sessionId) {
+		this.sessionId = sessionId;
 		this.client = new Client();
 		CourseSessionService sessionService = new CourseSessionServiceImpl();
 		CourseSession session = sessionService.findById(sessionId);
 		this.client.setCourseSession(session);
+		System.out.println("********** on update : "+this.sessionId);
+		return "inscription?faces-redirect=true";
 	}
-	
+
 	public String askValidation(){
 		System.out.println("Redirecting to validation...");
 		return "validation?faces-redirect=true";
@@ -61,6 +69,9 @@ public class SubscriptionView {
 	public void setSessionId(Integer sessionId) {
 		this.sessionId = sessionId;
 	}
+	public void setSessionId(int sessionId) {
+		this.sessionId = sessionId;
+	}
 
 	public Client getClient() {
 		return client;
@@ -69,7 +80,6 @@ public class SubscriptionView {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
 	
 
 }

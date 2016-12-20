@@ -4,6 +4,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,9 +35,10 @@ public class Client implements java.io.Serializable {
 	public Client() {
 	}
 
-	public Client(int id, CourseSession courseSession, String lastname, String firstname, String address, String phone,
+	
+	
+	public Client(CourseSession courseSession, String lastname, String firstname, String address, String phone,
 			String email) {
-		this.id = id;
 		this.courseSession = courseSession;
 		this.lastname = lastname;
 		this.firstname = firstname;
@@ -43,9 +46,20 @@ public class Client implements java.io.Serializable {
 		this.phone = phone;
 		this.email = email;
 	}
+	
+//	public Client(int id, CourseSession courseSession, String lastname, String firstname, String address, String phone,
+//			String email) {
+//		this.id = id;
+//		this.courseSession = courseSession;
+//		this.lastname = lastname;
+//		this.firstname = firstname;
+//		this.address = address;
+//		this.phone = phone;
+//		this.email = email;
+//	}
 
 	@Id
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false)
 	public int getId() {
 		return this.id;
@@ -101,7 +115,7 @@ public class Client implements java.io.Serializable {
 		this.phone = phone;
 	}
 
-	@Column(name = "EMAIL", unique = true, nullable = false, length = 60)
+	@Column(name = "EMAIL", nullable = false, length = 60)
 	public String getEmail() {
 		return this.email;
 	}

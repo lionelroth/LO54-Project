@@ -7,13 +7,22 @@
 
 	<h:head>
 		<title>Validation</title>
+		
+		<style>
+	        div[id="forma:growl-error_container"] > div {
+	            background-color: red !important;
+	        }
+	        div[id="forma:growl-success_container"] > div{
+	            background-color: green !important;
+	        }
+        </style>
 	</h:head>
 	
 	<h:body>
 		<h1 align="center" class="title ui-widget-header ui-corner-all">Validation</h1>
 	
         <h:form>
-        	<p:growl id="growl" life="2000" />
+        	<p:growl id="growl-success" life="2000" />
 			<p:panel id="recap" header="Récapitulatif">
 				<h:panelGrid id="grid" columns="2" cellpadding="5">
 				
@@ -35,7 +44,7 @@
 		            <h:outputLabel for="course" value="Cours souhaité : " />                    
 		            <h:outputText id="course" value="#{subscriptionView.client.courseSession.course.code} : #{subscriptionView.client.courseSession.course.title}" />
 		            
-					<p:commandButton id="validateButton" value="Valider l'inscription" update="growl" actionListener="#{subscriptionView.validateSub}"/>
+					<p:commandButton id="validateButton" value="Valider l'inscription" update="growl-success" actionListener="#{subscriptionView.validateSub}"/>
 				</h:panelGrid>
 				
 				

@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -41,7 +42,7 @@ public class CourseSession implements java.io.Serializable {
 		this.endDate = endDate;
 	}
 
-
+	@GeneratedValue
 	@Id
 	@Column(name = "ID", unique = true, nullable = false)
 	public int getId() {

@@ -15,6 +15,7 @@
 			.column2 {
 			     width: 200px;
 			}
+			
 		</style>
 	</h:head>
 	
@@ -23,7 +24,10 @@
 		<h1 align="center" class="title ui-widget-header ui-corner-all">Inscription</h1>
 	
 		<p:tooltip/>
-
+		
+		<h:form >
+			<h:outputLabel value="#{subscriptionView.sessionId}"/>
+		</h:form>
 		
 		<h:form id="infos">
 			<p:panel header="Informations utilisateur">
