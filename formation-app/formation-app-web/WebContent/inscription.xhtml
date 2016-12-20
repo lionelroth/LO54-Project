@@ -13,9 +13,14 @@
 			}
 			
 			.column2 {
-			     width: 200px;
+			     width: 500px;
+			}
+			
+			.inputText{
+			width: 400px;
 			}
 		</style>
+		
 	</h:head>
 	
 	<h:body>
@@ -28,36 +33,41 @@
 		<h:form id="infos">
 			<p:panel header="Informations utilisateur">
 				<h:panelGrid id="grid" columns="3" cellpadding="5" columnClasses="column1, column2">
-				
-					<p:outputLabel for="firstname" value="Prénom " />                    
+					
+					<p:outputLabel for="firstname" value="Prénom " />
 		            <p:inputText id="firstname" value="#{subscriptionView.client.firstname}" 
-		            	required="true" label="Prénom" size="20"
-		            	requiredMessage="Veuillez renseigner votre prénom."/>
+		            	required="true" label="Prénom" maxlength="20"
+		            	requiredMessage="Veuillez renseigner votre prénom."
+		            	styleClass="inputText"/>
 		            <p:message for="firstname" display="tooltip" />
 				
 					<p:outputLabel for="lastname" value="Nom " />                    
 		            <p:inputText id="lastname" value="#{subscriptionView.client.lastname}" 
-		            	required="true" label="Nom" size="20"
-		            	requiredMessage="Veuillez renseigner votre nom."/>
+		            	required="true" label="Nom" maxlength="20"
+		            	requiredMessage="Veuillez renseigner votre nom."
+		            	styleClass="inputText"/>
 		            <p:message for="lastname" display="tooltip" />
 				
 					<p:outputLabel for="address" value="Adresse " />                    
 		            <p:inputText id="address" value="#{subscriptionView.client.address}" 
-		            	required="true" label="Adresse" size="100"
-		            	requiredMessage="Veuillez renseigner votre adresse."/>
+		            	required="true" label="Adresse" maxlength="100"
+		            	requiredMessage="Veuillez renseigner votre adresse."
+		            	styleClass="inputText"/>
 		            <p:message for="address" display="tooltip"/>
 				
 					<p:outputLabel for="phone" value="Téléphone " />                    
 		            <p:inputText id="phone" value="#{subscriptionView.client.phone}" 
-		            	required="true" label="Telephone" size="10"
-		            	requiredMessage="Veuillez renseigner votre numéro de téléphone."/>
+		            	required="true" label="Telephone" maxlength="10"
+		            	requiredMessage="Veuillez renseigner votre numéro de téléphone."
+		            	styleClass="inputText"/>
 		            <p:message for="phone" display="tooltip"/>
 		            
 					<p:outputLabel for="email" value="Email " />
-					<p:inputText id="email" required="true" label="Email" size="60"
+					<p:inputText id="email" required="true" label="Email" maxlength="60"
 						requiredMessage="Veuillez renseigner votre adresse mail."
 						validatorMessage="Format de mail invalide."
-						value="#{subscriptionView.client.email}">
+						value="#{subscriptionView.client.email}"
+						styleClass="inputText">
 					  <f:validateRegex
 						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 					</p:inputText>

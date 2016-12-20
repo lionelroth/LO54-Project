@@ -14,7 +14,7 @@
 	
         <h:form>
         	<p:growl id="growl" life="2000" />
-			<p:panel id="recap" header="Récapitulatif">
+			<p:panel id="recap" header="Récapitulatif" style="margin-bottom:20px;">
 				<h:panelGrid id="grid" columns="2" cellpadding="5">
 				
 					<h:outputLabel for="firstname" value="Prénom : " />                    
@@ -41,5 +41,7 @@
 				
 			</p:panel>
 		</h:form>
+		
+		<p:button outcome="index" value="Retourner à l'accueil" style="position: absolute; right: 30px"/>
 	</h:body>
 </html>
