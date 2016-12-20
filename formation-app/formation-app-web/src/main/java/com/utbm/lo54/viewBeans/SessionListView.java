@@ -58,6 +58,8 @@ public class SessionListView {
 	}
 	
 	public void computeFilter(){
+		System.out.println("computefilter");
+		
 		selectedCourseSessionList.clear();
 		for (CourseSession courseSession : courseSessionList) {
 			if(
@@ -74,6 +76,8 @@ public class SessionListView {
 				selectedCourseSessionList.add(courseSession);
 			}
 		}
+		
+		computeSearchRecap();
 	}
 
 	public void codeSearchUpdated(){
@@ -90,11 +94,6 @@ public class SessionListView {
 	}
 	public void locationFilterUpdated(){
 		locationFilterSelected = true;
-	}
-	
-	public void search(){
-		computeSearchRecap();
-		System.out.println(searchRecap);
 	}
 	
 	/** Pour construire automatiquement un récapitulatif des paramètres de recherche. */
@@ -228,7 +227,7 @@ public class SessionListView {
 	}
 
 	public List<CourseSession> getSelectedCourseSessionList() {
-		this.computeFilter();
+//		this.computeFilter();
 		return selectedCourseSessionList;
 	}
 
