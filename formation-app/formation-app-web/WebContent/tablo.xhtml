@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Wai les tablo wai</title>
+		<style>
+            .tableTest { height: 200%; background: yellow; margin-bottom:10px; }
+            .tableTest tr td{
+ 	    		height: 35px;  
+			}
+        </style>
+	</h:head>
+	<h:body>
+		<h:form>
+			<p:dataTable id="dataList" value="#{sessionListView.selectedCourseSessionList}" var="courseSession"
+					draggableColumns="true" stickyHeader="true">
+		        <f:facet name="header">
+	        		Sessions proposées
+				</f:facet>
+		        
+		        <p:column sortBy="#{courseSession.course.code}" headerText="Code" 
+		        	filterBy="#{courseSession.course.code}" filterMatchMode="contains">
+					<h:outputText value="#{courseSession.course.code}"/>
+	        	</p:column>
+	        	
+	        	<p:column sortBy="#{courseSession.course.title}" headerText="Titre" 
+	        		filterBy="#{courseSession.course.title}" filterMatchMode="contains">
+		        	<h:outputText value="#{courseSession.course.title}"/>
+		        </p:column>
+	    	    
+	    	    <p:column sortBy="#{courseSession.location.city}" headerText="Ville" 
+	    	    	filterBy="#{courseSession.location.city}" filterMatchMode="contains">
+		        	<h:outputText value="#{courseSession.location.city}"/>
+	        	</p:column>
+	        	
+	        	<p:column sortBy="#{courseSession.startDate}" headerText="Dates">
+		        	<h:outputText value="#{courseSession.startDate} - #{courseSession.endDate}"/>
+	        	</p:column>
+	        	
+	        	<f:facet name="footer">
+	        		insert trucs here psk c rigolow
+<!-- 					#{sessionListView.selectedCourseSessionList} formation(s) proposée(s). -->
+				</f:facet>
+	        	
+		    </p:dataTable>		
+		</h:form>
+	</h:body>
+</html>

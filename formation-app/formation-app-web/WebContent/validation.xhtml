@@ -19,38 +19,47 @@
 	</h:head>
 	
 	<h:body>
-		<h1 align="center" class="title ui-widget-header ui-corner-all">Validation</h1>
-	
-        <h:form>
-        	<p:growl id="growl-success" life="2000" />
-			<p:panel id="recap" header="Récapitulatif" style="margin-bottom:20px;>
+		<ui:composition template="/template/baseLayout.xhtml">
+			<ui:define name="content">
+				<p:steps styleClass="custom" activeIndex="3" readonly="false">
+					 <p:menuitem value="#{navigationController.pageLabels.get(0)}" url="#{navigationController.pageUrls.get(0)}"/>
+					 <p:menuitem value="#{navigationController.pageLabels.get(1)}" url="#{navigationController.pageUrls.get(1)}"/>
+					 <p:menuitem value="#{navigationController.pageLabels.get(2)}" url="#{navigationController.pageUrls.get(2)}"/>
+					 <p:menuitem value="#{navigationController.pageLabels.get(3)}" url="#{navigationController.pageUrls.get(3)}"/>
+				</p:steps>
 			
-			<h:panelGrid id="grid" columns="2" cellpadding="5">
+		        <h:form>
+		        	<p:growl id="growl-success" life="2000" />
+					<p:panel id="recap" header="Récapitulatif" style="margin-bottom:20px;">
+					
+					<h:panelGrid id="grid" columns="2" cellpadding="5">
+					
+						<h:outputLabel for="firstname" value="Prénom : " />                    
+			            <h:outputText id="firstname" value="#{subscriptionView.client.firstname}" />
+					
+						<h:outputLabel for="lastname" value="Nom : " />                    
+			            <h:outputText id="lastname" value="#{subscriptionView.client.lastname}" />
+					
+						<h:outputLabel for="address" value="Adresse : " />                    
+			            <h:outputText id="address" value="#{subscriptionView.client.address}" />
+					
+						<h:outputLabel for="phone" value="Téléphone : " />                    
+			            <h:outputText id="phone" value="#{subscriptionView.client.phone}" />
+					
+						<h:outputLabel for="mail" value="Mail : " />                    
+			            <h:outputText id="mail" value="#{subscriptionView.client.email}" />
+			            
+			            <h:outputLabel for="course" value="Cours souhaité : " />                    
+			            <h:outputText id="course" value="#{subscriptionView.client.courseSession.course.code} : #{subscriptionView.client.courseSession.course.title}" />
+			            
+						<p:commandButton id="validateButton" value="Valider l'inscription" update="growl-success" action="#{subscriptionView.validateSub}"/>
+					</h:panelGrid>
+						
+					</p:panel>
+				</h:form>
 			
-				<h:outputLabel for="firstname" value="Prénom : " />                    
-	            <h:outputText id="firstname" value="#{subscriptionView.client.firstname}" />
-			
-				<h:outputLabel for="lastname" value="Nom : " />                    
-	            <h:outputText id="lastname" value="#{subscriptionView.client.lastname}" />
-			
-				<h:outputLabel for="address" value="Adresse : " />                    
-	            <h:outputText id="address" value="#{subscriptionView.client.address}" />
-			
-				<h:outputLabel for="phone" value="Téléphone : " />                    
-	            <h:outputText id="phone" value="#{subscriptionView.client.phone}" />
-			
-				<h:outputLabel for="mail" value="Mail : " />                    
-	            <h:outputText id="mail" value="#{subscriptionView.client.email}" />
-	            
-	            <h:outputLabel for="course" value="Cours souhaité : " />                    
-	            <h:outputText id="course" value="#{subscriptionView.client.courseSession.course.code} : #{subscriptionView.client.courseSession.course.title}" />
-	            
-				<p:commandButton id="validateButton" value="Valider l'inscription" update="growl-success" actionListener="#{subscriptionView.validateSub}"/>
-			</h:panelGrid>
-				
-			</p:panel>
-		</h:form>
-		
-		<p:button outcome="index" value="Retourner à l'accueil" style="position: absolute; right: 30px"/>
+				<p:button outcome="index" value="Retourner à l'accueil" style="position: absolute; right: 30px"/>
+			</ui:define>
+		</ui:composition>
 	</h:body>
 </html>

@@ -11,76 +11,74 @@
 			.column1 {
 			     width: 150px;
 			}
-			
 			.column2 {
 			     width: 500px;
 			}
-			
 			.inputText{
 			width: 400px;
 			}
-			
 		</style>
-		
 	</h:head>
 	
 	<h:body>
 	
-		<h1 align="center" class="title ui-widget-header ui-corner-all">Inscription</h1>
-	
-		<p:tooltip/>
-		
-		<h:form >
-			<h:outputLabel value="#{subscriptionView.sessionId}"/>
-		</h:form>
-		
-		<h:form id="infos">
-			<p:panel header="Informations utilisateur">
-				<h:panelGrid id="grid" columns="3" cellpadding="5" columnClasses="column1, column2">
-					
-					<p:outputLabel for="firstname" value="Prénom " />
-		            <p:inputText id="firstname" value="#{subscriptionView.client.firstname}" 
-		            	required="true" label="Prénom" maxlength="20"
-		            	requiredMessage="Veuillez renseigner votre prénom."
-		            	styleClass="inputText"/>
-		            <p:message for="firstname" display="tooltip" />
-				
-					<p:outputLabel for="lastname" value="Nom " />                    
-		            <p:inputText id="lastname" value="#{subscriptionView.client.lastname}" 
-		            	required="true" label="Nom" maxlength="20"
-		            	requiredMessage="Veuillez renseigner votre nom."
-		            	styleClass="inputText"/>
-		            <p:message for="lastname" display="tooltip" />
-				
-					<p:outputLabel for="address" value="Adresse " />                    
-		            <p:inputText id="address" value="#{subscriptionView.client.address}" 
-		            	required="true" label="Adresse" maxlength="100"
-		            	requiredMessage="Veuillez renseigner votre adresse."
-		            	styleClass="inputText"/>
-		            <p:message for="address" display="tooltip"/>
-				
-					<p:outputLabel for="phone" value="Téléphone " />                    
-		            <p:inputText id="phone" value="#{subscriptionView.client.phone}" 
-		            	required="true" label="Telephone" maxlength="10"
-		            	requiredMessage="Veuillez renseigner votre numéro de téléphone."
-		            	styleClass="inputText"/>
-		            <p:message for="phone" display="tooltip"/>
-		            
-					<p:outputLabel for="email" value="Email " />
-					<p:inputText id="email" required="true" label="Email" maxlength="60"
-						requiredMessage="Veuillez renseigner votre adresse mail."
-						validatorMessage="Format de mail invalide."
-						value="#{subscriptionView.client.email}"
-						styleClass="inputText">
-					  <f:validateRegex
-						pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-					</p:inputText>
-					<p:message for="email" display="tooltip"/>
-					
-					<p:commandButton type="submit" value="OK" update="infos" action="#{subscriptionView.askValidation}"/>
-				</h:panelGrid>
-			</p:panel>
-
-	   </h:form>
+		<ui:composition template="/template/baseLayout.xhtml">
+			<ui:define name="content">
+				<p:steps styleClass="custom" activeIndex="2" readonly="false">
+					 <p:menuitem value="#{navigationController.pageLabels.get(0)}" url="#{navigationController.pageUrls.get(0)}"/>
+					 <p:menuitem value="#{navigationController.pageLabels.get(1)}" url="#{navigationController.pageUrls.get(1)}"/>
+					 <p:menuitem value="#{navigationController.pageLabels.get(2)}" url="#{navigationController.pageUrls.get(2)}"/>
+					 <p:menuitem value="#{navigationController.pageLabels.get(3)}" url="#{navigationController.pageUrls.get(3)}"/>
+				</p:steps>
+				<p:tooltip/>
+				<h:form id="infos">
+					<p:panel header="Informations utilisateur">
+						<h:panelGrid id="grid" columns="3" cellpadding="5" columnClasses="column1, column2">
+							
+							<p:outputLabel for="firstname" value="Prénom " />
+				            <p:inputText id="firstname" value="#{subscriptionView.client.firstname}" 
+				            	required="true" label="Prénom" maxlength="20"
+				            	requiredMessage="Veuillez renseigner votre prénom."
+				            	styleClass="inputText"/>
+				            <p:message for="firstname" display="tooltip" />
+						
+							<p:outputLabel for="lastname" value="Nom " />                    
+				            <p:inputText id="lastname" value="#{subscriptionView.client.lastname}" 
+				            	required="true" label="Nom" maxlength="20"
+				            	requiredMessage="Veuillez renseigner votre nom."
+				            	styleClass="inputText"/>
+				            <p:message for="lastname" display="tooltip" />
+						
+							<p:outputLabel for="address" value="Adresse " />                    
+				            <p:inputText id="address" value="#{subscriptionView.client.address}" 
+				            	required="true" label="Adresse" maxlength="100"
+				            	requiredMessage="Veuillez renseigner votre adresse."
+				            	styleClass="inputText"/>
+				            <p:message for="address" display="tooltip"/>
+						
+							<p:outputLabel for="phone" value="Téléphone " />                    
+				            <p:inputText id="phone" value="#{subscriptionView.client.phone}" 
+				            	required="true" label="Telephone" maxlength="10"
+				            	requiredMessage="Veuillez renseigner votre numéro de téléphone."
+				            	styleClass="inputText"/>
+				            <p:message for="phone" display="tooltip"/>
+				            
+							<p:outputLabel for="email" value="Email " />
+							<p:inputText id="email" required="true" label="Email" maxlength="60"
+								requiredMessage="Veuillez renseigner votre adresse mail."
+								validatorMessage="Format de mail invalide."
+								value="#{subscriptionView.client.email}"
+								styleClass="inputText">
+							  <f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							</p:inputText>
+							<p:message for="email" display="tooltip"/>
+							
+							<p:commandButton type="submit" value="OK" update="infos" action="#{subscriptionView.askValidation}"/>
+						</h:panelGrid>
+					</p:panel>
+			   </h:form>
+		   </ui:define>
+	   </ui:composition>
 	</h:body>
 </html>

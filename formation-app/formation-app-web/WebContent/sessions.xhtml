@@ -6,100 +6,106 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:head>
-		<title>Client List</title>
+		<title>Session List</title>
 		<style>
-            .tableTest { height: 200%; background: yellow; margin-bottom:10px; }
+            .tableTest { height: 200%; margin-bottom:10px; }
             .tableTest tr td{
  	    		height: 35px;  
 			}
+			
         </style>
 	</h:head>
 	<h:body>
-	
-		<p:panel header="Filter" id="filterPanel">
-			<h:form id="filtersForm">
-		
-				<h:panelGrid id="panelId" columns="3" styleClass="tableTest" cellpadding="5">
-					<p:selectBooleanCheckbox value="#{sessionListView.courseCodeFilterSelected}" >
-<!-- +add listener pr setter la valeur actu dans le bean sinon il remet la derniere submittée qd check/uncheck -->
-						<p:ajax event="change" update="researchCodePanel" /> 
-					</p:selectBooleanCheckbox>
-					<p:outputLabel value="Recherche par code de formation "/>
-					<h:panelGroup id="researchCodePanel">
-						<p:inputText id="researchCodeInput" value="#{sessionListView.courseCodeFilter}" rendered="#{sessionListView.courseCodeFilterSelected}"/>
-					</h:panelGroup>
-					
-					<p:selectBooleanCheckbox id="truc" value="#{sessionListView.courseTitleFilterSelected}">
-						<p:ajax event="change" update="researchTitlePanel" />
-					</p:selectBooleanCheckbox>
-					<h:outputText value="Recherche par mot-clé du titre "/>
-					<h:panelGroup id="researchTitlePanel">
-						<p:inputText value="#{sessionListView.courseTitleFilter}">
-							<p:ajax event="change" listener="#{sessionListView.titleSearchUpdated}" update="truc" />
-						</p:inputText>
-					</h:panelGroup>
-					
-					<p:selectBooleanCheckbox value="#{sessionListView.dateMiniSeleted}" />
-					<h:outputText value="Date Debut minimum : "/>
-					<p:calendar value="#{sessionListView.dateMini}" />
-					
-					<p:selectBooleanCheckbox value="#{sessionListView.dateMaxiSeleted}" />
-					<h:outputText value="Date Fin maximum : "/>
-					<p:calendar value="#{sessionListView.dateMaxi}" />
-					
-					<p:selectBooleanCheckbox value="#{sessionListView.locationFilterSelected}" immediate="true"/>
-					<h:outputText value="Recherche par lieux "/>
-					<p:selectCheckboxMenu
-					value="#{sessionListView.selectedLocations}"
-					converter="locationConverter"
-					filter="true" filterMatchMode="startsWith"
-					updateLabel="true"
-					label="Cities">
-						<f:selectItems value="#{sessionListView.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/>
-					</p:selectCheckboxMenu>
-					
-				</h:panelGrid>
-	
-				<p:commandButton type="submit" value="Rechercher" update="results" actionListener="#{sessionListView.search}"/>
-			</h:form>
-		</p:panel>
-		
-		
-		
-		<p:panel id="results" header="#{sessionListView.searchRecap}">	
-			<h:form id="dataListForm">
-<!-- 			    <p:dataList id="dataList" value="#{sessionListView.selectedCourseSessionList}" var="courseSession"> -->
-<!-- 			        #{courseSession.course.code}<br/> -->
-<!-- 			        #{courseSession.course.title}<br/> -->
-<!-- 			        #{courseSession.location.city}<br/> -->
-<!-- 			        #{courseSession.startDate} - #{courseSession.endDate}<br/> -->
-<!-- 			    </p:dataList> -->
-			    <p:dataTable id="dataList" value="#{sessionListView.selectedCourseSessionList}" var="courseSession">
-			        <p:column headerText="Code">
-			        	<h:outputText value="#{courseSession.course.code}"/>
-		        	</p:column>
-		        	<p:column headerText="Titre">
-			        	<h:outputText value="#{courseSession.course.title}"/>
-			        </p:column>
-			        <p:column headerText="Ville">
-			        	<h:outputText value="#{courseSession.location.city}"/>
-		        	</p:column>
-		        	<p:column headerText="Dates">
-			        	<h:outputText value="#{courseSession.startDate} - #{courseSession.endDate}"/>
-		        	</p:column>
-		        	<p:column>
-			        	<p:commandButton value="S'inscrire à cette session" update="testform" action="#{subscriptionView.updateSubscriptionSession(courseSession.id)}">
-<!-- 	        		 		<f:setPropertyActionListener target="#{subscriptionView.sessionId}" value="#{courseSession.id}"/> -->
-		        		</p:commandButton>
-		        		
-		        	</p:column>
-			    </p:dataTable>
-			    
-			</h:form>
-			<h:form id="testform">
-<!-- 				<h:outputLabel value="#{subscriptionView.sessionId}" /> -->
-			</h:form>
-	</p:panel>
-	
+		<ui:composition template="/template/baseLayout.xhtml">
+			<ui:define name="content">
+			
+			<p:steps styleClass="custom" activeIndex="1" readonly="false">
+				 <p:menuitem value="#{navigationController.pageLabels.get(0)}" url="#{navigationController.pageUrls.get(0)}"/>
+				 <p:menuitem value="#{navigationController.pageLabels.get(1)}" url="#{navigationController.pageUrls.get(1)}"/>
+				 <p:menuitem value="#{navigationController.pageLabels.get(2)}" url="#{navigationController.pageUrls.get(2)}"/>
+				 <p:menuitem value="#{navigationController.pageLabels.get(3)}" url="#{navigationController.pageUrls.get(3)}"/>
+			</p:steps>
+				<p:panel header="Filter" styleClass="tableTest" toggleable="true">
+					<h:form>
+				
+						<h:panelGrid id="panelId" columns="3" cellpadding="5">
+							<p:selectBooleanCheckbox id="codeFilterCheckbox" value="#{sessionListView.courseCodeFilterSelected}" />
+							<p:outputLabel value="Recherche par code de formation "/>
+							<p:inputText id="researchCodeInput" value="#{sessionListView.courseCodeFilter}">
+								<p:ajax event="change" listener="#{sessionListView.codeSearchUpdated}" update="codeFilterCheckbox" />
+							</p:inputText>
+							
+							<p:selectBooleanCheckbox id="titleFilterCheckbox" value="#{sessionListView.courseTitleFilterSelected}"/>
+							<h:outputText value="Recherche par mot-clé du titre "/>
+							<p:inputText value="#{sessionListView.courseTitleFilter}">
+								<p:ajax event="change" listener="#{sessionListView.titleSearchUpdated}" update="titleFilterCheckbox" />
+							</p:inputText>
+							
+							<p:selectBooleanCheckbox id="dateMiniCheckbox" value="#{sessionListView.dateMiniSeleted}" />
+							<h:outputText value="Date Debut minimum : "/>
+							<p:calendar value="#{sessionListView.dateMini}" >
+								<p:ajax event="dateSelect" listener="#{sessionListView.dateMiniUpdated}" update="dateMiniCheckbox" />
+							</p:calendar>
+							
+							<p:selectBooleanCheckbox id="dateMaxiCheckbox" value="#{sessionListView.dateMaxiSeleted}" />
+							<h:outputText value="Date Fin maximum : "/>
+							<p:calendar value="#{sessionListView.dateMaxi}">
+								<p:ajax event="dateSelect" listener="#{sessionListView.dateMaxiUpdated}" update="dateMaxiCheckbox" />
+							</p:calendar>
+							
+							<p:selectBooleanCheckbox id="locationFilterCheckbox" value="#{sessionListView.locationFilterSelected}" immediate="true"/>
+							<h:outputText value="Recherche par lieux "/>
+							<p:selectCheckboxMenu
+							value="#{sessionListView.selectedLocations}"
+							converter="locationConverter"
+							filter="true" filterMatchMode="startsWith"
+							label="Villes">
+								<f:selectItems value="#{sessionListView.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/>
+								<p:ajax event="change" listener="#{sessionListView.locationFilterUpdated}" update="locationFilterCheckbox" />
+							</p:selectCheckboxMenu>
+							
+						</h:panelGrid>
+			
+						<p:commandButton type="submit" value="Rechercher" update="results" actionListener="#{sessionListView.computeFilter}"/>
+					</h:form>
+				</p:panel>
+				
+				
+				
+				<p:panel id="results" header="#{sessionListView.searchRecap}" styleClass="tableTest">	
+					<h:form>
+					    <p:dataTable id="dataList" value="#{sessionListView.selectedCourseSessionList}" var="courseSession" sortBy="#{courseSession.course.code}" 
+					    emptyMessage="Aucun résulat" draggableColumns="true" stickyHeader="true">
+					        
+					        <p:column headerText="Code" style="width:110px" sortBy="#{courseSession.course.code}"
+					        	filterBy="#{courseSession.course.code}" filterMatchMode="contains">
+					        	<h:outputText value="#{courseSession.course.code}"/>
+				        	</p:column>
+				        	<p:column headerText="Titre" sortBy="#{courseSession.course.title}"
+				        		filterBy="#{courseSession.course.title}" filterMatchMode="contains">
+					        	<h:outputText value="#{courseSession.course.title}"/>
+					        </p:column>
+					        <p:column headerText="Ville" sortBy="#{courseSession.location.city}"
+					        	filterBy="#{courseSession.location.city}" filterMatchMode="contains">
+					        	<h:outputText value="#{courseSession.location.city}"/>
+				        	</p:column>
+				        	<p:column headerText="Dates" sortBy="#{courseSession.startDate}">
+					        	<h:outputText value="#{courseSession.startDate} / #{courseSession.endDate}"/>
+				        	</p:column>
+				        	<p:column headerText="Inscription" style="width:200px; text-align:center">
+					        	<p:commandButton value="S'inscrire à ce cours&#10;#{sessionListView.getRegisteredNumberForSession(courseSession.id)} inscrit(s)" 
+					        		style="white-space: pre;" action="#{subscriptionView.updateSubscriptionSession(courseSession.id)}">
+				        		</p:commandButton>
+				        	</p:column>
+				        	
+				        	<f:facet name="footer">
+								#{sessionListView.selectedCourseSessionList.size()} formation(s) proposée(s).
+							</f:facet>
+							
+					    </p:dataTable>
+					</h:form>
+				</p:panel>
+			</ui:define>
+		</ui:composition>
 	</h:body>
 </html>

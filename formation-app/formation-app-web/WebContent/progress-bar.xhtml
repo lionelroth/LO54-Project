@@ -5,6 +5,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
+<h:head>
+	<h:outputStylesheet name="layout.css" />
+
+</h:head>
+<h:body>
 
 	<h3>Choix blablabla</h3>
 	<p:steps activeIndex="1" styleClass="custom" readonly="false">
@@ -14,36 +19,33 @@
 	</p:steps>
 	 
 	<style type="text/css">
-	.ui-steps .ui-steps-item {
-	    width: 24%;
-	}
-	 
-	.ui-state-highlight {
-	    text-shadow: none !important;
-	}
-	 
-	.ui-steps.custom {
-	    margin-bottom: 30px;
-	}
-	 
-	.ui-steps.custom .ui-steps-item .ui-menuitem-link {
-	    height: 10px;
-	    padding: 0 1em;
-	}
-	 
-	.ui-steps.custom .ui-steps-item .ui-steps-number {
-	    background-color: #0081c2;
-	    color: #FFFFFF;
-	    display: inline-block;
-	    width: 30px;
-	    border-radius: 10px;
-	    margin-top: -10px;
-	    margin-bottom: 10px;
-	}
-	 
-	.ui-steps.custom .ui-steps-item.ui-state-highlight .ui-steps-title {
-	    color: #555;
-	}
+.ui-steps .ui-steps-item {
+    width: 25%;
+}
+  
+.ui-steps.custom {
+    margin-bottom: 30px;
+/*     margin-left: 15%; */
+}
+ 
+.ui-steps.custom .ui-steps-item .ui-menuitem-link {
+    height: 10px;
+    padding: 0 1em;
+}
+ 
+.ui-steps.custom .ui-steps-item .ui-steps-number {
+    background-color: #0081c2;
+    color: #FFFFFF;
+    display: inline-block;
+    width: 30px;
+    border-radius: 10px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+ 
+.ui-steps.custom .ui-steps-item.ui-state-highlight .ui-steps-title {
+    color: #555;
+}
 	</style>
-
+</h:body>
 </html>

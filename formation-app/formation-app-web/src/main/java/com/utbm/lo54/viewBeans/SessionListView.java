@@ -1,9 +1,11 @@
 package com.utbm.lo54.viewBeans;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -22,7 +24,9 @@ import com.utbm.lo54.formation_app.core.service.interfaces.LocationService;
 @SessionScoped
 public class SessionListView {
 	
-
+//	@Inject
+//	private NavigationController navigationController;
+	
 	private boolean courseCodeFilterSelected = false;
 	private String courseCodeFilter = "";
 	
@@ -47,6 +51,10 @@ public class SessionListView {
 	
 	public SessionListView() {
 		
+	}
+	
+	@PostConstruct
+	public void init(){
 		LocationService locationService = new LocationServiceImpl();
 		locationList = locationService.findAll();
 		selectedLocations = new ArrayList<>(locationList);
@@ -54,12 +62,9 @@ public class SessionListView {
 		CourseSessionService courseSessionService = new CourseSessionServiceImpl();
 		courseSessionList = courseSessionService.findAll();
 		selectedCourseSessionList = new ArrayList<>(courseSessionList);
-		
 	}
 	
 	public void computeFilter(){
-		System.out.println("computefilter");
-		
 		selectedCourseSessionList.clear();
 		for (CourseSession courseSession : courseSessionList) {
 			if(
@@ -99,6 +104,7 @@ public class SessionListView {
 	/** Pour construire automatiquement un récapitulatif des paramètres de recherche. */
 	private void computeSearchRecap() {
 		StringBuilder sb = new StringBuilder();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		if (courseCodeFilterSelected){
 			if (courseCodeFilter.isEmpty()){
 				sb.append("- Tous les codes de cours ");
@@ -114,10 +120,12 @@ public class SessionListView {
 			}
 		}
 		if (dateMiniSeleted){
-			sb.append("- Commençant après le " + dateMini.toString() + " ");
+			String dateMiniStr = formatter.format(dateMini);
+			sb.append("- Commençant après le " + dateMiniStr + " ");
 		}
 		if (dateMaxiSeleted){
-			sb.append("- Terminant avant le " + dateMaxi.toString() + " ");
+			String dateMaxiStr = formatter.format(dateMaxi);
+			sb.append("- Terminant avant le " + dateMaxiStr + " ");
 		}
 		if (locationFilterSelected){
 			if (selectedLocations.isEmpty()){
@@ -133,16 +141,8 @@ public class SessionListView {
 			sb.append("- Liste de toutes les sessions disponibles");
 		}
 		this.searchRecap = "Résultats de la recherche " + sb.toString();
-		System.out.println(sb.toString());
 	}
 	
-	public void goToSubscription(String id){
-		System.out.println("wtf : "+id);
-	}
-//	public String goToSubscription(){
-//		return "inscription?faces-redirect=true";
-//	}
-
 	
 	public int getRegisteredNumberForSession(Integer courseSessionId){
 		int counter = 0;

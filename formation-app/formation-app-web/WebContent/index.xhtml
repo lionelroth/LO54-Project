@@ -6,24 +6,23 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<h:head>
-		<title>Welcome</title>
+		<title>Accueil</title>
 	</h:head>
 	
 	<h:body>
 	
-	
-		<h1 align="center" class="title ui-widget-header ui-corner-all">
-			LO54 Project<br/>
-			
-		</h1>
-		<p>
-			Lionel Roth<br/>
-			Léo Roggy<br/>
-		</p>
-		
-		<p align="center">
-			<p:button outcome="sessions2" value="Consulter la liste des sessions" icon="ui-icon-document"/>
-		</p>
-		
+		<ui:composition template="/template/baseLayout.xhtml">
+				
+			<ui:define name="content">
+				<h1>
+					Ceci est la page d'accueil de notre appication web, 
+					réalisée dans le cadre de l'UV LO54. Pour accéder au choix des UVs,
+					Clickez sur le bouton ci-dessous.
+				</h1>
+				<p align="center">
+					<p:button outcome="sessions" value="Consulter la liste des sessions" icon="ui-icon-document"/>
+				</p>
+			</ui:define>
+		</ui:composition>
 	</h:body>
 </html>

@@ -5,7 +5,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
 import com.utbm.lo54.formation_app.core.entities.Client;
 import com.utbm.lo54.formation_app.core.entities.CourseSession;
@@ -14,23 +13,23 @@ import com.utbm.lo54.formation_app.core.service.impl.CourseSessionServiceImpl;
 import com.utbm.lo54.formation_app.core.service.interfaces.ClientService;
 import com.utbm.lo54.formation_app.core.service.interfaces.CourseSessionService;
 
-@ManagedBean (name="subscriptionView")
 @SessionScoped
+@ManagedBean (name = "subscriptionView")
 public class SubscriptionView {
+	
+//	@Inject
+//	private NavigationController navigationController;
 	
 	private Integer sessionId;
 	
 	private Client client;
 	
-//	@PostConstruct
-//	public void init(){
-//		//TODO à virer
-//		if (sessionId == null)
-//			sessionId = 2;
-//		
-//		System.out.println("********** on init : "+sessionId);
-//		updateSubscriptionSession(sessionId);
-//	}
+	public SubscriptionView() {
+	}
+
+	@PostConstruct
+	private void init(){
+	}
 	
 	public String updateSubscriptionSession(Integer sessionId) {
 		this.sessionId = sessionId;
@@ -38,26 +37,39 @@ public class SubscriptionView {
 		CourseSessionService sessionService = new CourseSessionServiceImpl();
 		CourseSession session = sessionService.findById(sessionId);
 		this.client.setCourseSession(session);
-		System.out.println("********** on update : "+this.sessionId);
+//		navigationController.setCurrentPage(2);
 		return "inscription?faces-redirect=true";
 	}
 
 	public String askValidation(){
 		System.out.println("Redirecting to validation...");
+//		navigationController.setCurrentPage(3);
 		return "validation?faces-redirect=true";
 	}
 	
 	
-	public String validateSub(ActionEvent actionEvent){
+	public void validateSub(){
 		System.out.println("Persistence call...");
-		ClientService clientService= new ClientServiceImpl();
-		clientService.persist(client);
-		addMessage("Inscription réalisée avec succès !");
-		
-		return "sessions?faces-redirect=true";
+		String message = "Erreur.";
+//		String redirect = "errors/error.xhtml";
+		try {
+			persistSub();
+			message = "Inscription réalisée avec succès !";
+//			redirect = "sessions?faces-redirect=true";
+		} catch(Exception e){
+			message = "Erreur lors de l'inscription. Veuillez vérifier les données saisies.";
+//			redirect = "sessions?faces-redirect=true";
+		}
+		addMessage(message);
+//		return redirect;
     }
      
-    public void addMessage(String summary) {
+    private void persistSub() {
+    	ClientService clientService = new ClientServiceImpl();
+		clientService.persist(client);
+	}
+
+	public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
@@ -80,6 +92,5 @@ public class SubscriptionView {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
 
 }
