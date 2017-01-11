@@ -21,7 +21,6 @@
 	</h:head>
 	
 	<h:body>
-	
 		<ui:composition template="/template/baseLayout.xhtml">
 			<ui:define name="content">
 				<p:steps styleClass="custom" activeIndex="2" readonly="false">
@@ -36,28 +35,28 @@
 						<h:panelGrid id="grid" columns="3" cellpadding="5" columnClasses="column1, column2">
 							
 							<p:outputLabel for="firstname" value="Prénom " />
-				            <p:inputText id="firstname" value="#{subscriptionView.client.firstname}" 
+				            <p:inputText id="firstname" value="#{subscriptionController.client.firstname}" 
 				            	required="true" label="Prénom" maxlength="20"
 				            	requiredMessage="Veuillez renseigner votre prénom."
 				            	styleClass="inputText"/>
 				            <p:message for="firstname" display="tooltip" />
 						
 							<p:outputLabel for="lastname" value="Nom " />                    
-				            <p:inputText id="lastname" value="#{subscriptionView.client.lastname}" 
+				            <p:inputText id="lastname" value="#{subscriptionController.client.lastname}" 
 				            	required="true" label="Nom" maxlength="20"
 				            	requiredMessage="Veuillez renseigner votre nom."
 				            	styleClass="inputText"/>
 				            <p:message for="lastname" display="tooltip" />
 						
 							<p:outputLabel for="address" value="Adresse " />                    
-				            <p:inputText id="address" value="#{subscriptionView.client.address}" 
+				            <p:inputText id="address" value="#{subscriptionController.client.address}" 
 				            	required="true" label="Adresse" maxlength="100"
 				            	requiredMessage="Veuillez renseigner votre adresse."
 				            	styleClass="inputText"/>
 				            <p:message for="address" display="tooltip"/>
 						
 							<p:outputLabel for="phone" value="Téléphone " />                    
-				            <p:inputText id="phone" value="#{subscriptionView.client.phone}" 
+				            <p:inputText id="phone" value="#{subscriptionController.client.phone}" 
 				            	required="true" label="Telephone" maxlength="10"
 				            	requiredMessage="Veuillez renseigner votre numéro de téléphone."
 				            	styleClass="inputText"/>
@@ -67,14 +66,14 @@
 							<p:inputText id="email" required="true" label="Email" maxlength="60"
 								requiredMessage="Veuillez renseigner votre adresse mail."
 								validatorMessage="Format de mail invalide."
-								value="#{subscriptionView.client.email}"
+								value="#{subscriptionController.client.email}"
 								styleClass="inputText">
 							  <f:validateRegex
 								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 							</p:inputText>
 							<p:message for="email" display="tooltip"/>
 							
-							<p:commandButton type="submit" value="OK" update="infos" action="#{subscriptionView.askValidation}"/>
+							<p:commandButton type="submit" value="OK" update="infos" action="#{subscriptionController.askValidation}"/>
 						</h:panelGrid>
 					</p:panel>
 			   </h:form>

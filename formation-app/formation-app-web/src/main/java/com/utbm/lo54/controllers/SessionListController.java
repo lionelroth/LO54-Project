@@ -1,4 +1,4 @@
-package com.utbm.lo54.viewBeans;
+package com.utbm.lo54.controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,9 +20,9 @@ import com.utbm.lo54.formation_app.core.service.interfaces.CourseSessionService;
 import com.utbm.lo54.formation_app.core.service.interfaces.LocationService;
 
 
-@ManagedBean (name="sessionListView")
 @SessionScoped
-public class SessionListView {
+@ManagedBean (name="sessionListController")
+public class SessionListController {
 	
 //	@Inject
 //	private NavigationController navigationController;
@@ -49,7 +49,7 @@ public class SessionListView {
 	
 	private String searchRecap = "Liste de toutes les sessions disponibles";
 	
-	public SessionListView() {
+	public SessionListController() {
 		
 	}
 	

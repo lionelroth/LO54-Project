@@ -35,24 +35,24 @@
 					<h:panelGrid id="grid" columns="2" cellpadding="5">
 					
 						<h:outputLabel for="firstname" value="Prénom : " />                    
-			            <h:outputText id="firstname" value="#{subscriptionView.client.firstname}" />
+			            <h:outputText id="firstname" value="#{subscriptionController.client.firstname}" />
 					
 						<h:outputLabel for="lastname" value="Nom : " />                    
-			            <h:outputText id="lastname" value="#{subscriptionView.client.lastname}" />
+			            <h:outputText id="lastname" value="#{subscriptionController.client.lastname}" />
 					
 						<h:outputLabel for="address" value="Adresse : " />                    
-			            <h:outputText id="address" value="#{subscriptionView.client.address}" />
+			            <h:outputText id="address" value="#{subscriptionController.client.address}" />
 					
 						<h:outputLabel for="phone" value="Téléphone : " />                    
-			            <h:outputText id="phone" value="#{subscriptionView.client.phone}" />
+			            <h:outputText id="phone" value="#{subscriptionController.client.phone}" />
 					
 						<h:outputLabel for="mail" value="Mail : " />                    
-			            <h:outputText id="mail" value="#{subscriptionView.client.email}" />
+			            <h:outputText id="mail" value="#{subscriptionController.client.email}" />
 			            
 			            <h:outputLabel for="course" value="Cours souhaité : " />                    
-			            <h:outputText id="course" value="#{subscriptionView.client.courseSession.course.code} : #{subscriptionView.client.courseSession.course.title}" />
+			            <h:outputText id="course" value="#{subscriptionController.client.courseSession.course.code} : #{subscriptionController.client.courseSession.course.title}" />
 			            
-						<p:commandButton id="validateButton" value="Valider l'inscription" update="growl-success" action="#{subscriptionView.validateSub}"/>
+						<p:commandButton id="validateButton" value="Valider l'inscription" update="growl-success" action="#{subscriptionController.validateSub}"/>
 					</h:panelGrid>
 						
 					</p:panel>

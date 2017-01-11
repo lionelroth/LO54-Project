@@ -1,4 +1,4 @@
-package com.utbm.lo54.viewBeans;
+package com.utbm.lo54.controllers;
 
 import java.util.ArrayList;
 import java.util.List;

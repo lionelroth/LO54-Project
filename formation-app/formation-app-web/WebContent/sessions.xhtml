@@ -29,52 +29,52 @@
 					<h:form>
 				
 						<h:panelGrid id="panelId" columns="3" cellpadding="5">
-							<p:selectBooleanCheckbox id="codeFilterCheckbox" value="#{sessionListView.courseCodeFilterSelected}" />
+							<p:selectBooleanCheckbox id="codeFilterCheckbox" value="#{sessionListController.courseCodeFilterSelected}" />
 							<p:outputLabel value="Recherche par code de formation "/>
-							<p:inputText id="researchCodeInput" value="#{sessionListView.courseCodeFilter}">
-								<p:ajax event="change" listener="#{sessionListView.codeSearchUpdated}" update="codeFilterCheckbox" />
+							<p:inputText id="researchCodeInput" value="#{sessionListController.courseCodeFilter}">
+								<p:ajax event="change" listener="#{sessionListController.codeSearchUpdated}" update="codeFilterCheckbox" />
 							</p:inputText>
 							
-							<p:selectBooleanCheckbox id="titleFilterCheckbox" value="#{sessionListView.courseTitleFilterSelected}"/>
+							<p:selectBooleanCheckbox id="titleFilterCheckbox" value="#{sessionListController.courseTitleFilterSelected}"/>
 							<h:outputText value="Recherche par mot-clé du titre "/>
-							<p:inputText value="#{sessionListView.courseTitleFilter}">
-								<p:ajax event="change" listener="#{sessionListView.titleSearchUpdated}" update="titleFilterCheckbox" />
+							<p:inputText value="#{sessionListController.courseTitleFilter}">
+								<p:ajax event="change" listener="#{sessionListController.titleSearchUpdated}" update="titleFilterCheckbox" />
 							</p:inputText>
 							
-							<p:selectBooleanCheckbox id="dateMiniCheckbox" value="#{sessionListView.dateMiniSeleted}" />
+							<p:selectBooleanCheckbox id="dateMiniCheckbox" value="#{sessionListController.dateMiniSeleted}" />
 							<h:outputText value="Date Debut minimum : "/>
-							<p:calendar value="#{sessionListView.dateMini}" >
-								<p:ajax event="dateSelect" listener="#{sessionListView.dateMiniUpdated}" update="dateMiniCheckbox" />
+							<p:calendar value="#{sessionListController.dateMini}" >
+								<p:ajax event="dateSelect" listener="#{sessionListController.dateMiniUpdated}" update="dateMiniCheckbox" />
 							</p:calendar>
 							
-							<p:selectBooleanCheckbox id="dateMaxiCheckbox" value="#{sessionListView.dateMaxiSeleted}" />
+							<p:selectBooleanCheckbox id="dateMaxiCheckbox" value="#{sessionListController.dateMaxiSeleted}" />
 							<h:outputText value="Date Fin maximum : "/>
-							<p:calendar value="#{sessionListView.dateMaxi}">
-								<p:ajax event="dateSelect" listener="#{sessionListView.dateMaxiUpdated}" update="dateMaxiCheckbox" />
+							<p:calendar value="#{sessionListController.dateMaxi}">
+								<p:ajax event="dateSelect" listener="#{sessionListController.dateMaxiUpdated}" update="dateMaxiCheckbox" />
 							</p:calendar>
 							
-							<p:selectBooleanCheckbox id="locationFilterCheckbox" value="#{sessionListView.locationFilterSelected}" immediate="true"/>
+							<p:selectBooleanCheckbox id="locationFilterCheckbox" value="#{sessionListController.locationFilterSelected}" immediate="true"/>
 							<h:outputText value="Recherche par lieux "/>
 							<p:selectCheckboxMenu
-							value="#{sessionListView.selectedLocations}"
+							value="#{sessionListController.selectedLocations}"
 							converter="locationConverter"
 							filter="true" filterMatchMode="startsWith"
 							label="Villes">
-								<f:selectItems value="#{sessionListView.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/>
-								<p:ajax event="change" listener="#{sessionListView.locationFilterUpdated}" update="locationFilterCheckbox" />
+								<f:selectItems value="#{sessionListController.locationList}" var="location" itemValue="#{location}" itemLabel="#{location.city}"/>
+								<p:ajax event="change" listener="#{sessionListController.locationFilterUpdated}" update="locationFilterCheckbox" />
 							</p:selectCheckboxMenu>
 							
 						</h:panelGrid>
 			
-						<p:commandButton type="submit" value="Rechercher" update="results" actionListener="#{sessionListView.computeFilter}"/>
+						<p:commandButton type="submit" value="Rechercher" update="results" actionListener="#{sessionListController.computeFilter}"/>
 					</h:form>
 				</p:panel>
 				
 				
 				
-				<p:panel id="results" header="#{sessionListView.searchRecap}" styleClass="tableTest">	
+				<p:panel id="results" header="#{sessionListController.searchRecap}" styleClass="tableTest">	
 					<h:form>
-					    <p:dataTable id="dataList" value="#{sessionListView.selectedCourseSessionList}" var="courseSession" sortBy="#{courseSession.course.code}" 
+					    <p:dataTable id="dataList" value="#{sessionListController.selectedCourseSessionList}" var="courseSession" sortBy="#{courseSession.course.code}" 
 					    emptyMessage="Aucun résulat" draggableColumns="true" stickyHeader="true">
 					        
 					        <p:column headerText="Code" style="width:110px" sortBy="#{courseSession.course.code}"
@@ -93,13 +93,13 @@
 					        	<h:outputText value="#{courseSession.startDate} / #{courseSession.endDate}"/>
 				        	</p:column>
 				        	<p:column headerText="Inscription" style="width:200px; text-align:center">
-					        	<p:commandButton value="S'inscrire à ce cours&#10;#{sessionListView.getRegisteredNumberForSession(courseSession.id)} inscrit(s)" 
-					        		style="white-space: pre;" action="#{subscriptionView.updateSubscriptionSession(courseSession.id)}">
+					        	<p:commandButton value="S'inscrire à ce cours&#10;#{sessionListController.getRegisteredNumberForSession(courseSession.id)} inscrit(s)" 
+					        		style="white-space: pre;" action="#{subscriptionController.updateSubscriptionSession(courseSession.id)}">
 				        		</p:commandButton>
 				        	</p:column>
 				        	
 				        	<f:facet name="footer">
-								#{sessionListView.selectedCourseSessionList.size()} formation(s) proposée(s).
+								#{sessionListController.selectedCourseSessionList.size()} formation(s) proposée(s).
 							</f:facet>
 							
 					    </p:dataTable>

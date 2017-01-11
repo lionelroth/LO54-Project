@@ -1,4 +1,4 @@
-package com.utbm.lo54.viewBeans;
+package com.utbm.lo54.controllers;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -14,8 +14,8 @@ import com.utbm.lo54.formation_app.core.service.interfaces.ClientService;
 import com.utbm.lo54.formation_app.core.service.interfaces.CourseSessionService;
 
 @SessionScoped
-@ManagedBean (name = "subscriptionView")
-public class SubscriptionView {
+@ManagedBean (name = "subscriptionController")
+public class SubscriptionController {
 	
 //	@Inject
 //	private NavigationController navigationController;
@@ -24,7 +24,7 @@ public class SubscriptionView {
 	
 	private Client client;
 	
-	public SubscriptionView() {
+	public SubscriptionController() {
 	}
 
 	@PostConstruct
